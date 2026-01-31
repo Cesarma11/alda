@@ -10,204 +10,339 @@
 
 <body>
 
-    <header id="main-header">
-        <div class="header-content" style="position: relative;">
-            <a href="index.html" style="text-decoration:none" ><h1 id="logo-text">Construccions  ALDA</h1></a>
-            <img id="painter" src="img/pintor2.gif" alt="Pintor animado">
-            <div class="iconos">🧱 🔨 🏗️</div>
-            <a href="tel:622629880" class="btn">📞 Llamar ahora 622 62 98 80</a>
+<header id="main-header">
+    <div class="header-content" style="position: relative;">
+        <a href="index.html" style="text-decoration:none"><h1 id="logo-text">Construcciones  ALDA</h1></a>
+        <img id="painter" src="img/pintor2.gif" alt="Pintor animado">
+        <div class="iconos">🧱 🔨 🏗️</div>
+        <a href="tel:622629880" class="btn" id="llamar-btn">📞 Llamar ahora 622 62 98 80</a>
+    </div>
+
+    <button class="menu-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <a href="https://wa.me/622629880?text=Hola,%20quiero%20información%20sobre%20mi%20proyecto" 
+        target="_blank" class="whatsapp-float" style="text-decoration: none;">
+        <img src="./img/whatsApp.png" alt="WhatsApp">
+        <span class="whatsapp-text" id="whatsapp-text">Envíanos un WhatsApp</span>
+    </a>
+
+<nav class="header-nav">
+    <a href="#quienes" id="nav-quienes">Quiénes somos</a>
+    <a href="#servicios" id="nav-servicios">Qué hacemos</a>
+    <a href="#proyectos" id="nav-proyectos">Proyectos</a>
+    <a href="#contacto" id="nav-contacto">Contacto</a>
+
+    <!-- Menú desplegable de idiomas -->
+    <div class="dropdown">
+        <a href="#" class="dropbtn">Idioma ▼</a>
+        <div class="dropdown-content">
+            <a href="#" onclick="cambiarIdioma('es'); return false;">Español</a>
+            <a href="#" onclick="cambiarIdioma('cat'); return false;">Català</a>            
+            <a href="#" onclick="cambiarIdioma('en'); return false;">English</a>
         </div>
+    </div>
+</nav>
 
-        <button class="menu-toggle" aria-label="Abrir menú">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+</header>
 
-        <!-- Botón WhatsApp junto al menú toggle -->
-        <a href="https://wa.me/622629880?text=Hola,%20quiero%20información%20sobre%20mi%20proyecto" 
-            target="_blank" class="whatsapp-float" style="text-decoration: none;"  >
-            <img src="./img/whatsApp.png" alt="WhatsApp">
-            <span class="whatsapp-text">Envíanos un WhatsApp</span>
+<section class="servicios">
+    <h2 id="servicios-titulo">Nuestros Servicios</h2>
+    <div class="servicios-grid">
+        <a href="construccion.html" class="servicio-card">
+        <img src="img/cocinas/cocina1.jpg" alt="Cocinas">
+        <h3 id="servicio-cocinas">Cocinas</h3>
         </a>
+        <a href="construccion.html" class="servicio-card">
+        <img src="img/baños/aseo1.jpg" alt="Baños">
+        <h3 id="servicio-banos">Baños</h3>
+        </a>
+        <a href="construccion.html" class="servicio-card">
+        <img src="img/reformas/reforma1.jpg" alt="Reformas">
+        <h3 id="servicio-reformas">Reformas</h3>
+        </a>
+        <a href="construccion.html" class="servicio-card">
+        <img src="img/fachadas/fachada1.jpg" alt="Fachadas">
+        <h3 id="servicio-fachadas">Fachadas</h3>
+        </a>
+    </div>
+</section>
 
-        <nav class="header-nav">
-            <a href="#quienes">Quiénes somos</a>
-            <a href="#servicios">Qué hacemos</a>
-            <a href="#proyectos">Proyectos</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
-    </header>
+<section>
+    <h2 id="por-que-titulo">Por qué elegir Aldaba</h2>
+    <ul>
+        <li id="razon1">✔ Empresa local en Cerdanyola del Vallès</li>
+        <li id="razon2">✔ Presupuesto sin compromiso</li>
+        <li id="razon3">✔ Seriedad y acabados de calidad</li>
+        <li id="razon4">✔ Atención personalizada</li>
+    </ul>
+</section>
 
-    <section class="servicios">
-        <h2>Nuestros Servicios</h2>
-        <div class="servicios-grid">
-            <a href="construccion.html" class="servicio-card">
-            <img src="img/cocinas/cocina1.jpg"   alt="Cocinas">
-            <h3>Cocinas</h3>
-            </a>
-            <a href="construccion.html" class="servicio-card">
-            <img src="img/baños/aseo1.jpg"   alt="Baños">
-            <h3>Baños</h3>
-            </a>
-            <a href="construccion.html" class="servicio-card">
-            <img src="img/reformas/reforma1.jpg"  alt="Reformas">
-            <h3>Reformas</h3>
-            </a>
-            <a href="construccion.html" class="servicio-card">
-            <img src="img/fachadas/fachada1.jpg" alt="Fachadas">
-            <h3>Fachadas</h3>
-            </a>
-        </div>
-    </section>
+<section>
+    <h2 id="trabajos-titulo">Trabajos realizados</h2>
+    <div class="galeria">
+        <img src="img/obra1.jpg" alt="Reforma en Cerdanyola del Vallès">
+        <img src="img/obra2.jpg" alt="Trabajo de albañilería en vivienda">
+    </div>
+</section>
+
+<section id="contacto">
+    <h2 id="contacto-titulo">Contacto</h2>
+    <p id="telefono-text"><strong>Teléfono:</strong> 622 62 98 80</p>
+    <p id="zona-text"><strong>Zona de trabajo:</strong> Cerdanyola del Vallès y alrededores</p>
+    <a href="tel:622 62 98 80" class="btn" id="solicitar-btn">📞 Solicitar presupuesto</a>
+</section>
+
+<section>
+    <h1 id="form-titulo">PONTE EN CONTACTO CON NOSOTROS</h1>
+    <h4 style="text-align: justify;" id="form-text">
+        ¡Hablemos de tu proyecto! Rellena el formulario y uno de nuestros asesores te contactará cuanto antes.
+        Da el primer paso para hacer realidad la reforma de tus sueños. Confía en nuestra experiencia: encontraremos
+        la solución perfecta para tu hogar.
+    </h4>
+    <form id="contact-form" action="" method="POST" enctype="text/plain">
+        <label for="name" id="label-name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email" id="label-email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="telefono" id="label-telefono">Teléfono:</label>
+        <input type="tel" id="tel" name="tel" required>
+
+        <label for="message" id="label-message">Mensaje:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" id="form-btn">Enviar</button>
+    </form>
+</section>
+
+<footer>
+<p id="footer-text">© 2026 Alda · Albañilería en Cerdanyola del Vallès</p>
+</footer>
+
+<!------------------------------------- ZONA DE JAVASCRIPT------------------------------------------->
+
+<script>
+/* ==========================
+   1️⃣ REDUCIR EL HEADER EN SCROLL
+   ========================== */
+let lastScroll = 0;
+window.addEventListener("scroll", () => {
+    if (window.innerWidth > 768) return; // solo móvil
+    const currentScroll = window.pageYOffset;
+    const header = document.querySelector("header");
+    if (currentScroll > lastScroll && currentScroll > 80) {
+        header.classList.add("hide");
+    } else {
+        header.classList.remove("hide");
+    }
+    lastScroll = currentScroll;
+});
+
+/* ==========================
+   2️⃣ MENU HAMBURGUESA
+   ========================== */
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".header-nav");
+menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menuToggle.classList.toggle("active");
+    nav.classList.toggle("active");
+});
+nav.addEventListener("click", (e) => e.stopPropagation());
+document.addEventListener("click", () => {
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+});
+
+/* ==========================
+   3️⃣ TEXTOS POR IDIOMA
+   ========================== */
+const textos = {
+     es: {
+        "logo-text":"Construcciones ALDA",
+        "llamar-btn":"📞 Llamar ahora 622 62 98 80",
+        "whatsapp-text":"Envíanos un WhatsApp",
+        "nav-quienes":"Quiénes somos",
+        "nav-servicios":"Qué hacemos",
+        "nav-proyectos":"Proyectos",
+        "nav-contacto":"Contacto",
+        "servicios-titulo":"Nuestros Servicios",
+        "servicio-cocinas":"Cocinas",
+        "servicio-banos":"Baños",
+        "servicio-reformas":"Reformas",
+        "servicio-fachadas":"Fachadas",
+        "por-que-titulo":"Por qué elegir Aldaba",
+        "razon1":"✔ Empresa local en Cerdanyola del Vallès",
+        "razon2":"✔ Presupuesto sin compromiso",
+        "razon3":"✔ Seriedad y acabados de calidad",
+        "razon4":"✔ Atención personalizada",
+        "trabajos-titulo":"Trabajos realizados",
 
 
-    <section>
-        <h2>Por qué elegir Aldaba</h2>
-        <ul>
-            <li>✔ Empresa local en Cerdanyola del Vallès</li>
-            <li>✔ Presupuesto sin compromiso</li>
-            <li>✔ Seriedad y acabados de calidad</li>
-            <li>✔ Atención personalizada</li>
-        </ul>
-    </section>
 
-    <section>
-        <h2>Trabajos realizados</h2>
-        <div class="galeria">
-            <img src="img/obra1.jpg" alt="Reforma en Cerdanyola del Vallès">
-            <img src="img/obra2.jpg" alt="Trabajo de albañilería en vivienda">
-        </div>
-    </section>
+        "contacto-titulo":"Contacto",
+        "telefono-text":"Teléfono: 622 62 98 80",
+        "zona-text":"Zona de trabajo: Cerdanyola del Vallès y alrededores",
+        "solicitar-btn":"📞 Solicitar presupuesto",
+        "form-titulo":"PONTE EN CONTACTO CON NOSOTROS",
+        "form-text":"¡Hablemos de tu proyecto! Rellena el formulario y uno de nuestros asesores te contactará cuanto antes. Da el primer paso para hacer realidad la reforma de tus sueños. Confía en nuestra experiencia: encontraremos la solución perfecta para tu hogar.",
+        "label-name":"Nombre:",
+        "label-email":"Email:",
+        "label-telefono":"Teléfono:",
+        "label-message":"Mensaje:",
+        "form-btn":"Enviar",
+        "footer-text":"© 2026 Alda · Albañilería en Cerdanyola del Vallès"
+    },
+    en: {
+        "logo-text":"ALDA Constructions",
+        "llamar-btn":"📞 Call now 622 62 98 80",
+        "whatsapp-text":"Send us a WhatsApp",
+        "nav-quienes":"About us",
+        "nav-servicios":"Services",
+        "nav-proyectos":"Projects",
+        "nav-contacto":"Contact",
+        "servicios-titulo":"Our Services",
+        "servicio-cocinas":"Kitchens",
+        "servicio-banos":"Bathrooms",
+        "servicio-reformas":"Renovations",
+        "servicio-fachadas":"Facades",
+        "por-que-titulo":"Why choose Aldaba",
+        "razon1":"✔ Local company in Cerdanyola del Vallès",
+        "razon2":"✔ Free quote",
+        "razon3":"✔ Reliability and quality finishes",
+        "razon4":"✔ Personalized attention",
+        "trabajos-titulo":"Completed projects",
 
-    <section id="contacto" >
-        <h2>Contacto</h2>
-        <p><strong>Teléfono:</strong> 622 62 98 80</p>
-        <p><strong>Zona de trabajo:</strong> Cerdanyola del Vallès y alrededores</p>
-        <a href="tel:622 62 98 80" class="btn">📞 Solicitar presupuesto</a>
-    </section>
 
-    <section>
-        <h1>PONTE EN CONTACTO CON NOSOTROS</h1>
-        <h4 style="text-align: justify;" >
-            ¡Hablemos de tu proyecto! Rellena el formulario y uno de nuestros asesores te contactará cuanto antes.
-            Da el primer paso para hacer realidad la reforma de tus sueños. Confía en nuestra experiencia: encontraremos
-            la solución perfecta para tu hogar.
-        </h4>
-        <form id="contact-form" action="" method="POST" enctype="text/plain">
-            <label for="name">Nombre:</label>
-            <input type="text" id="name" name="name" required>
+        "contacto-titulo":"Contact",
+        "telefono-text":"Phone: 622 62 98 80",
+        "zona-text":"Working area: Cerdanyola del Vallès and surroundings",
+        "solicitar-btn":"📞 Request a quote",
+        "form-titulo":"GET IN TOUCH WITH US",
+        "form-text":"Let's talk about your project! Fill out the form and one of our advisors will contact you as soon as possible. Take the first step to make your dream renovation come true. Trust our experience: we will find the perfect solution for your home.",
+        "label-name":"Name:",
+        "label-email":"Email:",
+        "label-telefono":"Phone:",
+        "label-message":"Message:",
+        "form-btn":"Send",
+        "footer-text":"© 2026 Alda · Construction in Cerdanyola del Vallès"
+    },
+    cat: {
+        "logo-text":"Construccions ALDA",
+        "llamar-btn":"📞 Truca ara 622 62 98 80",
+        "whatsapp-text":"Envia’ns un WhatsApp",
+        "nav-quienes":"Qui som",
+        "nav-servicios":"Què fem",
+        "nav-proyectos":"Projectes",
+        "nav-contacto":"Contacte",
+        "servicios-titulo":"Els nostres serveis",
+        "servicio-cocinas":"Cuines",
+        "servicio-banos":"Banys",
+        "servicio-reformas":"Reformes",
+        "servicio-fachadas":"Façanes",
+        "por-que-titulo":"Per què triar Aldaba",
+        "razon1":"✔ Empresa local a Cerdanyola del Vallès",
+        "razon2":"✔ Pressupost sense compromís",
+        "razon3":"✔ Serietat i acabats de qualitat",
+        "razon4":"✔ Atenció personalitzada",
+        "trabajos-titulo":"Treballs realitzats",
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
 
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="tel" name="tel" required>
+        "contacto-titulo":"Contacte",
+        "telefono-text":"Telèfon: 622 62 98 80",
+        "zona-text":"Zona de treball: Cerdanyola del Vallès i voltants",
+        "solicitar-btn":"📞 Sol·licitar pressupost",
+        "form-titulo":"POSA’T EN CONTACTE AMB NOSALTRES",
+        "form-text":"Parlem del teu projecte! Omple el formulari i un dels nostres assessors et contactarà com més aviat millor. Fes el primer pas per fer realitat la reforma dels teus somnis. Confia en la nostra experiència: trobarem la solució perfecta per a la teva llar.",
+        "label-name":"Nom:",
+        "label-email":"Email:",
+        "label-telefono":"Telèfon:",
+        "label-message":"Missatge:",
+        "form-btn":"Enviar",
+        "footer-text":"© 2026 Alda · Albañileria a Cerdanyola del Vallès"
+    }
+};
 
-            <label for="message">Mensaje:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+/* ==========================
+   4️⃣ Animación del logo con pintor
+   ========================== */
+function animarLogo() {
+    const logo = document.getElementById("logo-text");
+    const painter = document.getElementById("painter");
+    const letters = logo.textContent.split("");
 
-            <button type="submit">Enviar</button>
-        </form>
-    </section>
+    // Limpiar y crear spans
+    logo.textContent = "";
+    letters.forEach(letter => {
+        const span = document.createElement("span");
+        span.textContent = letter;
+        span.style.opacity = 0;
+        span.style.display = "inline-block";
+        logo.appendChild(span);
+    });
 
-    <footer>
-    <p>© 2026 Alda · Albañilería en Cerdanyola del Vallès</p>
-    </footer>
+    const spans = logo.querySelectorAll("span");
+    let i = 0;
+    painter.style.opacity = 1;
+    painter.style.transition = "left 0.3s ease";
 
-    <!------------------------------------- ZONA DE JAVASCRIPT------------------------------------------->
-
-    <script> // PARA REDUCIR EL HEADER EN EL SCROLEO DE LA PAGINA
-
-        let lastScroll = 0;
-
-        window.addEventListener("scroll", () => {
-
-        if (window.innerWidth > 768) return; // ❌ solo móvil
-
-        const currentScroll = window.pageYOffset;
-        const header = document.querySelector("header");
-
-        if (currentScroll > lastScroll && currentScroll > 80) {
-            header.classList.add("hide");     // baja → oculta
-        } else {
-            header.classList.remove("hide");  // sube → muestra
-        }
-
-        lastScroll = currentScroll;
-        });
-    </script>
-
-    <script>// para la animacion del header
-        document.addEventListener("DOMContentLoaded", function() {
-        const text = document.getElementById("logo-text");
-        const letters = text.textContent.split("");
-        text.textContent = "";
-
-        // Crear span por letra
-        letters.forEach(letter => {
-            const span = document.createElement("span");
-            span.textContent = letter;
-            text.appendChild(span);
-        });
-
-        const spans = text.querySelectorAll("span");
-        const painter = document.getElementById("painter");
-
-        let i = 0;
-
-        function paintLetter() {
-            if (i >= spans.length) {
-            // Cuando termina la última letra, hacer fade out
+    function pintarLetra() {
+        if(i >= spans.length){
+            painter.style.transition = "opacity 0.5s";
             painter.style.opacity = 0;
             return;
-            }
+        }
+        const span = spans[i];
+        const spanRect = span.getBoundingClientRect();
+        const headerRect = logo.parentElement.getBoundingClientRect();
+        painter.style.left = (spanRect.left - headerRect.left) + "px";
 
-            const span = spans[i];
-            const spanRect = span.getBoundingClientRect();
-            const headerRect = text.parentElement.getBoundingClientRect();
-
-            // Mover pintor sobre la letra
-            painter.style.left = spanRect.left - headerRect.left + "px";
-
-            // Aparecer la letra simulando pintura
-            setTimeout(() => {
+        // Mostrar letra después de llegar el painter
+        setTimeout(()=>{
+            span.style.transition = "opacity 0.3s, transform 0.3s";
             span.style.opacity = 1;
             span.style.transform = "translateY(0)";
-            }, 200);
-
             i++;
-            setTimeout(paintLetter, 300); // siguiente letra
+            setTimeout(pintarLetra, 150); // tiempo más natural
+        }, 150);
+    }
+
+    setTimeout(pintarLetra, 50);
+}
+
+/* ==========================
+   5️⃣ Función para cambiar idioma
+   ========================== */
+function cambiarIdioma(idioma){
+    for (let id in textos[idioma]) {
+        const elemento = document.getElementById(id);
+        if(!elemento) continue;
+
+        if(id === "logo-text"){
+            elemento.textContent = textos[idioma][id];
+            animarLogo();
+        } else {
+            elemento.textContent = textos[idioma][id];
         }
+    }
+    localStorage.setItem("idioma", idioma);
+}
 
-        paintLetter();
-        });
-
-    </script>
-        <!-- abrir y cerrar el  menu hamburguesa en el movil-->
-    <script>
-        const menuToggle = document.querySelector(".menu-toggle");
-        const nav = document.querySelector(".header-nav");
-
-        /* Abrir / cerrar con la hamburguesa */
-        menuToggle.addEventListener("click", (e) => {
-        e.stopPropagation(); // evita que el click se propague
-        menuToggle.classList.toggle("active");
-        nav.classList.toggle("active");
-        });
-
-        /* Evita que hacer click dentro del menú lo cierre */
-        nav.addEventListener("click", (e) => {
-        e.stopPropagation();
-        });
-
-        /* Click en cualquier parte de la pantalla */
-        document.addEventListener("click", () => {
-        menuToggle.classList.remove("active");
-        nav.classList.remove("active");
-        });
-    </script>
+/* ==========================
+   6️⃣ Inicializar idioma al cargar la página
+   ========================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const idiomaGuardado = localStorage.getItem("idioma") || "es";
+    setTimeout(()=>cambiarIdioma(idiomaGuardado), 50);
+});
+</script>
 
 </body>
 </html>
+
 
