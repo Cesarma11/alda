@@ -148,7 +148,7 @@ header .iconos:hover {
   }
 
   header h1 {
-    font-size: 1.3em;
+    font-size: 0,8em;
   }
 
   .btn {
@@ -291,3 +291,4 @@ footer {
     font-size: 2em;
   }
 }
+
