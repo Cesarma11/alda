@@ -9,35 +9,42 @@
 </head>
 <body>
 
-<header>
-  <div class="header-content">
-    <h1>Alda</h1>
-    <p>Albañilería en Cerdanyola del Vallès</p>
-    <div class="iconos">
-      🧱 🔨 🏗️
-    </div>
-    <a href="tel:622 62 98 80" class="btn">📞 Llamar ahora  622 62 98 80 </a>
-  </div>
+<header id="main-header">
+<div class="header-content" style="position: relative;">
+  <h1 id="logo-text">Construccions  ALDA</h1>
+  <img id="painter" src="img/pintor2.gif" alt="Pintor animado">
+  <div class="iconos">🧱 🔨 🏗️</div>
+  <a href="tel:622629880" class="btn">📞 Llamar ahora 622 62 98 80</a>
+</div>
+
+
+  <nav class="header-nav">
+    <a href="#quienes">Quiénes somos</a>
+    <a href="#servicios">Qué hacemos</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
 </header>
+
 
 
 <section class="servicios">
   <h2>Nuestros Servicios</h2>
   <div class="servicios-grid">
-    <a href="cocinas.html" class="servicio-card">
-      <img src="img/cocinas/cocina1.jpg"  style="width: 40%;" alt="Cocinas">
+    <a href="construccion.html" class="servicio-card">
+      <img src="img/cocinas/cocina1.jpg"   alt="Cocinas">
       <h3>Cocinas</h3>
     </a>
-    <a href="banos.html" class="servicio-card">
-      <img src="img/baños/aseo1.jpg"  style="width: 40%;" alt="Baños">
+    <a href="construccion.html" class="servicio-card">
+      <img src="img/baños/aseo1.jpg"   alt="Baños">
       <h3>Baños</h3>
     </a>
-    <a href="reformas.html" class="servicio-card">
-      <img src="img/reformas/reforma1.jpg"  width="40%" alt="Reformas">
+    <a href="construccion.html" class="servicio-card">
+      <img src="img/reformas/reforma1.jpg"  alt="Reformas">
       <h3>Reformas</h3>
     </a>
-    <a href="fachadas.html" class="servicio-card">
-      <img src="img/fachadas/fachada1.jpg" width="40%" alt="Fachadas">
+    <a href="construccion.html" class="servicio-card">
+      <img src="img/fachadas/fachada1.jpg" alt="Fachadas">
       <h3>Fachadas</h3>
     </a>
   </div>
@@ -70,8 +77,66 @@
 </section>
 
 <footer>
-  <p>© 2026 Aldaba · Albañilería en Cerdanyola del Vallès</p>
+  <p>© 2026 Alda · Albañilería en Cerdanyola del Vallès</p>
 </footer>
+
+<script> // PARA REDUCIR EL HEADER EN EL SCROLEO DE LA PAGINA
+ window.addEventListener('scroll', function() {
+  const header = document.getElementById('main-header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});   
+</script>
+<script>// para la animacion del header
+document.addEventListener("DOMContentLoaded", function() {
+  const text = document.getElementById("logo-text");
+  const letters = text.textContent.split("");
+  text.textContent = "";
+
+  // Crear span por letra
+  letters.forEach(letter => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    text.appendChild(span);
+  });
+
+  const spans = text.querySelectorAll("span");
+  const painter = document.getElementById("painter");
+
+  let i = 0;
+
+  function paintLetter() {
+    if (i >= spans.length) {
+      // Cuando termina la última letra, hacer fade out
+      painter.style.opacity = 0;
+      return;
+    }
+
+    const span = spans[i];
+    const spanRect = span.getBoundingClientRect();
+    const headerRect = text.parentElement.getBoundingClientRect();
+
+    // Mover pintor sobre la letra
+    painter.style.left = spanRect.left - headerRect.left + "px";
+
+    // Aparecer la letra simulando pintura
+    setTimeout(() => {
+      span.style.opacity = 1;
+      span.style.transform = "translateY(0)";
+    }, 200);
+
+    i++;
+    setTimeout(paintLetter, 300); // siguiente letra
+  }
+
+  paintLetter();
+});
+
+</script>
 
 </body>
 </html>
+
