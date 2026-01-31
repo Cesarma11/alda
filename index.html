@@ -12,7 +12,7 @@
 
 <header id="main-header">
     <div class="header-content" style="position: relative;">
-        <a href="index.html" style="text-decoration:none"><h1 id="logo-text">Construcciones  ALDA</h1></a>
+        <a href="index.html" style="text-decoration:none"><h1 id="logo-text">Construcciones&nbsp;&nbsp;ALDA</h1></a>
         <img id="painter" src="img/pintor2.gif" alt="Pintor animado">
         <div class="iconos">🧱 🔨 🏗️</div>
         <a href="tel:622629880" class="btn" id="llamar-btn">📞 Llamar ahora 622 62 98 80</a>
@@ -274,15 +274,23 @@ const textos = {
 function animarLogo() {
     const logo = document.getElementById("logo-text");
     const painter = document.getElementById("painter");
-    const letters = logo.textContent.split("");
+    const letters = logo.textContent.split(""); // incluye espacios
 
     // Limpiar y crear spans
     logo.textContent = "";
     letters.forEach(letter => {
         const span = document.createElement("span");
         span.textContent = letter;
-        span.style.opacity = 0;
-        span.style.display = "inline-block";
+
+        // si es espacio, darle ancho fijo
+        if(letter === " ") {
+            span.style.display = "inline-block";
+            span.style.width = "0.5em"; // ajusta el espacio entre palabras
+        } else {
+            span.style.opacity = 0;
+            span.style.display = "inline-block";
+        }
+
         logo.appendChild(span);
     });
 
@@ -291,29 +299,41 @@ function animarLogo() {
     painter.style.opacity = 1;
     painter.style.transition = "left 0.3s ease";
 
-    function pintarLetra() {
-        if(i >= spans.length){
-            painter.style.transition = "opacity 0.5s";
-            painter.style.opacity = 0;
-            return;
-        }
-        const span = spans[i];
-        const spanRect = span.getBoundingClientRect();
-        const headerRect = logo.parentElement.getBoundingClientRect();
-        painter.style.left = (spanRect.left - headerRect.left) + "px";
-
-        // Mostrar letra después de llegar el painter
-        setTimeout(()=>{
-            span.style.transition = "opacity 0.3s, transform 0.3s";
-            span.style.opacity = 1;
-            span.style.transform = "translateY(0)";
-            i++;
-            setTimeout(pintarLetra, 150); // tiempo más natural
-        }, 150);
+function pintarLetra() {
+    if(i >= spans.length){
+        // Desaparece al final
+        painter.style.transition = "opacity 0.5s";
+        painter.style.opacity = 0;
+        return;
     }
 
-    setTimeout(pintarLetra, 50);
+    const span = spans[i];
+    const spanRect = span.getBoundingClientRect();
+    const headerRect = logo.parentElement.getBoundingClientRect();
+
+    // Retrasar el movimiento del pintor ligeramente
+    setTimeout(() => {
+        if(span.textContent.trim() !== "") {
+            painter.style.left = (spanRect.left - headerRect.left) + "px";
+        }
+    }, 500); // retraso en ms, ajusta a tu gusto
+
+    setTimeout(()=>{
+        if(span.textContent.trim() !== "") {
+            span.style.transition = "opacity 0.3s, transform 0.1s";
+            span.style.opacity = 1;
+            span.style.transform = "translateY(0)";
+        }
+        i++;
+        pintarLetra();
+    }, 400);
 }
+
+
+    // Pequeño delay para que painter tenga posición correcta
+    setTimeout(pintarLetra, 100);
+}
+
 
 /* ==========================
    5️⃣ Función para cambiar idioma
@@ -344,5 +364,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
-
