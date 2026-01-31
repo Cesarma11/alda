@@ -338,6 +338,98 @@ function pintarLetra() {
 /* ==========================
    5️⃣ Función para cambiar idioma
    ========================== */
+// ==========================
+// 3️⃣ Función para cambiar idioma (cierra menú hamburguesa en móvil)
+// ==========================
+function cambiarIdioma(idioma) {
+    // Cambiar todos los textos
+    for (let id in textos[idioma]) {
+        const elemento = document.getElementById(id);
+        if (!elemento) continue;
+
+        if (id === "logo-text") {
+            elemento.textContent = textos[idioma][id];
+            animarLogo();
+        } else {
+            elemento.textContent = textos[idioma][id];
+        }
+    }
+
+    // Guardar idioma
+    localStorage.setItem("idioma", idioma);
+
+    // Cerrar menú hamburguesa si está activo
+    const menuToggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".header-nav");
+    if (menuToggle.classList.contains("active")) {
+        menuToggle.classList.remove("active");
+        nav.classList.remove("active");
+    }
+}
+
+/* ==========================
+   6️⃣ Inicializar idioma al cargar la página
+   ========================== */
+document.addEventListener("DOMContentLoaded", () => {
+    const idiomaGuardado = localStorage.getItem("idioma") || "es";
+    setTimeout(()=>cambiarIdioma(idiomaGuardado), 50);
+});
+
+// ==========================
+// 5️⃣ Cerrar menú hamburguesa al seleccionar idioma
+// ==========================
+document.querySelectorAll(".dropdown-content a").forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const idioma = link.getAttribute("onclick").match(/'(.*?)'/)[1]; // extrae 'es','en','cat'
+        cambiarIdioma(idioma);
+
+        // Cerrar hamburguesa y menú
+        document.querySelector(".menu-toggle").classList.remove("active");
+        document.querySelector(".header-nav").classList.remove("active");
+
+        // Cerrar dropdown
+        document.querySelector(".dropdown-content").classList.remove("show");
+    });
+});
+
+// También hacemos que el botón desplegable funcione en móvil
+const dropBtn = document.querySelector(".dropbtn");
+const dropdownContent = document.querySelector(".dropdown-content");
+
+dropBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    dropdownContent.classList.toggle("show");
+});
+
+document.querySelectorAll(".dropdown-content a").forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const idioma = link.getAttribute("onclick").match(/'(.*?)'/)[1]; // extrae 'es','en','cat'
+        cambiarIdioma(idioma);
+
+        // Cerrar hamburguesa y menú
+        document.querySelector(".menu-toggle").classList.remove("active");
+        document.querySelector(".header-nav").classList.remove("active");
+        dropdownContent.classList.remove("show");
+
+        // Resaltar idioma seleccionado
+        document.querySelectorAll(".dropdown-content a").forEach(a => a.classList.remove("active-language"));
+        link.classList.add("active-language");
+    });
+});
+// Función para resaltar el idioma activo
+function resaltarIdioma(idioma) {
+    document.querySelectorAll(".dropdown-content a").forEach(a => {
+        a.classList.remove("active-language");
+        const linkIdioma = a.getAttribute("onclick").match(/'(.*?)'/)[1];
+        if(linkIdioma === idioma) {
+            a.classList.add("active-language");
+        }
+    });
+}
+
+// Modificamos cambiarIdioma para que también resalte
 function cambiarIdioma(idioma){
     for (let id in textos[idioma]) {
         const elemento = document.getElementById(id);
@@ -351,15 +443,26 @@ function cambiarIdioma(idioma){
         }
     }
     localStorage.setItem("idioma", idioma);
+
+    // Resaltar el idioma seleccionado
+    resaltarIdioma(idioma);
+
+    // Cerrar menú hamburguesa
+    document.querySelector(".menu-toggle").classList.remove("active");
+    document.querySelector(".header-nav").classList.remove("active");
+    const dropdownContent = document.querySelector(".dropdown-content");
+    if(dropdownContent) dropdownContent.classList.remove("show");
 }
 
-/* ==========================
-   6️⃣ Inicializar idioma al cargar la página
-   ========================== */
+// Al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
     const idiomaGuardado = localStorage.getItem("idioma") || "es";
-    setTimeout(()=>cambiarIdioma(idiomaGuardado), 50);
+    setTimeout(() => {
+        cambiarIdioma(idiomaGuardado); // esto ahora también resalta el idioma correcto
+    }, 50);
 });
+
+
 </script>
 
 </body>

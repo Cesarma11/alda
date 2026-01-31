@@ -256,6 +256,18 @@ header .iconos:hover {
   animation: brush-move 0.5s ease-in-out forwards;
 }
 
+/* ==========================
+   Estilo para idioma activo en el menu hamburguesa
+   ========================== */
+.dropdown-content a.active-language {
+    background-color: #d35400;  /* fondo más oscuro */
+    color: white;               /* texto blanco */
+    font-weight: bold;
+}
+
+
+
+
 
 /* =========================================================
    CONTENIDO GENERAL
@@ -404,17 +416,24 @@ footer {
     position: relative;        /* relativo dentro del nav */
   }
 
-  .dropdown-content {
-    display: none;
-    position: relative;        /* relativo para flujo del nav */
-    background-color: #fff;
-    color: #000;
-    min-width: 150px;
-    margin: 5px 0 0 0;
-    border-radius: 5px;
-    z-index: 1010;             /* por encima del header-nav */
-  }
 
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #f39c12;
+    min-width: 120px;
+    border-radius: 5px;
+    z-index: 1002;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+  
   .dropdown-content a {
     display: block;
     padding: 8px 12px;
