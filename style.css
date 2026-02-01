@@ -601,6 +601,7 @@ footer {
 .imagenes-cocina {
   display: flex;
   gap: 10px;              /* separación entre imágenes */
+  padding-top: 20px;
 }
 
 .imagenes-cocina img {
