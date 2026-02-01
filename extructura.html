@@ -1,0 +1,12 @@
+/aldaba-web
+│
+├── index.html        ← Página principal con header
+├── cocinas.html      ← Página de Cocinas
+├── banos.html        ← Página de Baños
+├── reformas.html     ← Página de Reformas
+├── fachadas.html     ← Página de Fachadas
+├── style.css
+└── img/
+    ├── cocina1.jpg
+    ├── bano1.jpg
+    └── ... etc

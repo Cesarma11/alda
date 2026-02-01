@@ -42,6 +42,14 @@ header {
   box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
+header h1{
+  font-family: 'Permanent Marker', cursive;
+
+}
+
+
+
+
 /* Header reducido al hacer scroll */
 header.scrolled {
   height: 60px;
