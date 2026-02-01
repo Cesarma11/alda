@@ -594,4 +594,27 @@ footer {
   }
 }
 
+/* =========================================================
+   SECCION COCINAS
+   ========================================================= */
 
+.imagenes-cocina {
+  display: flex;
+  gap: 10px;              /* separación entre imágenes */
+}
+
+.imagenes-cocina img {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .imagenes-cocina {
+    flex-direction: column;
+  }
+
+  .imagenes-cocina img {
+    width: 100%;
+  }
+}
