@@ -7,10 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
 </head>
 
 <body>
+<a href="cocinas.html">PRUEBA COCINAS</a>
 
 <header id="main-header">
     <div class="header-content" style="position: relative;">
@@ -35,11 +38,21 @@
 <nav class="header-nav">
     <a href="index.html" id="nav-inicio">Inicio</a>
     <a href="quienSomos.html" id="nav-quienes">Quiénes somos</a>
-    <a href="#servicios" id="nav-servicios">Qué hacemos</a>
+<div class="dropdown">
+    <a href="#" class="dropbtn" id="nav-servicios">
+        <i class="fa-solid fa-hammer"></i> Qué hacemos ▼
+    </a>
+    <div class="dropdown-content">
+        <a href="cocinas.html"><i class="fa-solid fa-kitchen-set"></i> Cocinas</a>
+        <a href="banos.html"><i class="fa-solid fa-bath"></i> Baños</a>
+        <a href="reformas.html"><i class="fa-solid fa-screwdriver-wrench"></i> Reformas</a>
+        <a href="fachadas.html"><i class="fa-solid fa-building"></i> Fachadas</a>
+    </div>
+</div>
+
+
     <a href="#proyectos" id="nav-proyectos">Proyectos</a>
     <a href="#contacto" id="nav-contacto">Contacto</a>
-
-    <!-- Menú desplegable de idiomas -->
     <!-- Menú desplegable de idiomas -->
     <div class="dropdown">
         <a href="#" class="dropbtn">Idioma ▼</a>
@@ -55,7 +68,6 @@
             </a>
         </div>
     </div>
-
 </nav>
 
 </header>
@@ -67,7 +79,7 @@
         <img src="img/cocinas/cocina1.jpg" alt="Cocinas">
         <h3 id="servicio-cocinas">Cocinas</h3>
         </a>
-        <a href="construccion.html" class="servicio-card">
+        <a href="banos.html" class="servicio-card">
         <img src="img/baños/aseo1.jpg" alt="Baños">
         <h3 id="servicio-banos">Baños</h3>
         </a>
@@ -470,8 +482,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 50);
 });
 
+</script>
+<script>/* goteo pintura de letras*/
 
 </script>
+
+
 
 </body>
 </html>
