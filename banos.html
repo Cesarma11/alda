@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -39,20 +40,22 @@
 
             <!-- Menú desplegable de idiomas -->
             <!-- Menú desplegable de idiomas -->
+
             <div class="dropdown">
                 <a href="#" class="dropbtn">Idioma ▼</a>
                 <div class="dropdown-content">
                     <a href="#" onclick="cambiarIdioma('es'); return false;">
-                        <img src="img/espanol.png" alt="Español"> Español
+                        <img src="img/espanol.png" alt="Español"> <span class="nav-text" id="idiomaEspanol"></span>
                     </a>
                     <a href="#" onclick="cambiarIdioma('cat'); return false;">
-                        <img src="img/catalan.png" alt="Català"> Català
+                        <img src="img/catalan.png" alt="Català"> <span class="nav-text" id="idiomaCatalan"></span>
                     </a>            
                     <a href="#" onclick="cambiarIdioma('en'); return false;">
-                        <img src="img/ingles.png" alt="English"> English
+                        <img src="img/ingles.png" alt="English"> <span class="nav-text" id="idiomaIngles"></span>
                     </a>
                 </div>
             </div>
+
         </nav>
 
     </header>
@@ -143,6 +146,13 @@
             "nav-proyectos":"Proyectos",
             "nav-contacto":"Contacto",
             "servicios-titulo":"Nuestros Servicios",
+            "idiomaEspanol":"Español",
+            "idiomaCatalan":"Catalán",
+            "idiomaIngles":"Ingles",
+
+
+
+
             "servicio-cocinas":"Cocinas",
             "servicio-banos":"Baños",
             "servicio-reformas":"Reformas",
@@ -174,6 +184,9 @@
             "nav-proyectos":"Projects",
             "nav-contacto":"Contact",
             "servicios-titulo":"Our Services",
+            "idiomaEspanol":"Spanish",
+            "idiomaCatalan":"Catalan",
+            "idiomaIngles":"English",
             "servicio-cocinas":"Kitchens",
             "servicio-banos":"Bathrooms",
             "servicio-reformas":"Renovations",
@@ -204,6 +217,9 @@
             "nav-proyectos":"Projectes",
             "nav-contacto":"Contacte",
             "servicios-titulo":"Els nostres serveis",
+            "idiomaEspanol":"Espanyol",
+            "idiomaCatalan":"Català",
+            "idiomaIngles":"Anglès",            
             "servicio-cocinas":"Cuines",
             "servicio-banos":"Banys",
             "servicio-reformas":"Reformes",

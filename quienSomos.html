@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -34,26 +35,49 @@
 <nav class="header-nav">
     <a href="index.html" id="nav-inicio">Inicio</a>
     <a href="quienSomos.html" id="nav-quienes">Quiénes somos</a>
-    <a href="#servicios" id="nav-servicios">Qué hacemos</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn" id="nav-servicios">
+                    <i class="fa-solid fa-hammer"></i> Qué hacemos ▼
+                </a>
+                <div class="dropdown-content">
+                    <a href="cocinas.html" >
+                        <i class="fa-solid fa-kitchen-set"></i> 
+                        <span class="nav-text"id="nav-queCocinas"></span>
+                    </a>
+                    <a href="banos.html" >
+                        <i class="fa-solid fa-bath"></i>
+                        <span class="nav-text"id="nav-queBanos"></span>
+                    </a>
+                    <a href="reformas.html" >
+                        <i class="fa-solid fa-screwdriver-wrench"></i> 
+                        <span class="nav-text"id="nav-queReformas"></span>
+                    </a>
+                    <a href="fachadas.html" >
+                        <i class="fa-solid fa-building"></i>
+                        <span class="nav-text"id="nav-queFachadas"></span>
+                    </a>
+
+                </div>
+            </div>
     <a href="#proyectos" id="nav-proyectos">Proyectos</a>
     <a href="#contacto" id="nav-contacto">Contacto</a>
 
     <!-- Menú desplegable de idiomas -->
     <!-- Menú desplegable de idiomas -->
-    <div class="dropdown">
-        <a href="#" class="dropbtn">Idioma ▼</a>
-        <div class="dropdown-content">
-            <a href="#" onclick="cambiarIdioma('es'); return false;">
-                <img src="img/espanol.png" alt="Español"> Español
-            </a>
-            <a href="#" onclick="cambiarIdioma('cat'); return false;">
-                <img src="img/catalan.png" alt="Català"> Català
-            </a>            
-            <a href="#" onclick="cambiarIdioma('en'); return false;">
-                <img src="img/ingles.png" alt="English"> English
-            </a>
-        </div>
-    </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Idioma ▼</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="cambiarIdioma('es'); return false;">
+                        <img src="img/espanol.png" alt="Español"> <span class="nav-text" id="idiomaEspanol"></span>
+                    </a>
+                    <a href="#" onclick="cambiarIdioma('cat'); return false;">
+                        <img src="img/catalan.png" alt="Català"> <span class="nav-text" id="idiomaCatalan"></span>
+                    </a>            
+                    <a href="#" onclick="cambiarIdioma('en'); return false;">
+                        <img src="img/ingles.png" alt="English"> <span class="nav-text" id="idiomaIngles"></span>
+                    </a>
+                </div>
+            </div>
 
 </nav>
 
@@ -71,7 +95,7 @@
 <section id="contacto">
     <h2 id="contacto-titulo">Contacto</h2>
     <p id="telefono-text"><strong>Teléfono:</strong> 622 62 98 80</p>
-    <p id="zona-text"><strong>Zona de trabajo:</strong> Cerdanyola del Vallès y alrededores</p>
+    <p id="zona-text"><strong>Zona de trabajo:</strong> </p>
     <a href="tel:622 62 98 80" class="btn" id="solicitar-btn">📞 Solicitar presupuesto</a>
 </section>
 
@@ -119,7 +143,7 @@ document.addEventListener("click", () => {
    ========================== */
 const textos = {
      es: {
-        "logo-text":"Construcciones ALDA",
+        "logo-text":"Construc,ALDA",
         "llamar-btn":"📞 Llamar ahora 622 62 98 80",
         "whatsapp-text":"Envíanos un WhatsApp",
         "nav-inicio":"inicio",
@@ -128,16 +152,23 @@ const textos = {
         "nav-proyectos":"Proyectos",
         "nav-contacto":"Contacto",
         "servicios-titulo":"Nuestros Servicios",
+        "idiomaEspanol":"Español",
+        "idiomaCatalan":"Catalán",
+        "idiomaIngles":"Ingles",
+        "nav-queCocinas":"Cocinas",
+        "nav-queBanos":"Baños", 
+        "nav-queFachadas":"Fachadas",
+        "nav-queReformas":"Reformas", 
         "servicio-cocinas":"Cocinas",
         "servicio-banos":"Baños",
         "servicio-reformas":"Reformas",
         "servicio-fachadas":"Fachadas",
-        "por-que-titulo":"¿Por qué elegir Construcciones ALDA?",
+        "por-que-titulo":"¿Por qué elegir Construc,ALDA?",
         "parrafo":" Somos una empresa de albañilería con más de 15 años de experiencia en el sector, especializada en reformas, obras y trabajos de construcción en viviendas y locales. Durante todos estos años hemos trabajado con un objetivo claro: ofrecer resultados de calidad, seriedad y confianza en cada proyecto. Nos caracterizamos por un trato cercano y personalizado, escuchando siempre las necesidades de cada cliente para aportar la mejor solución, cuidando los detalles y cumpliendo los plazos acordados. Creemos que un buen trabajo no solo se ve en el resultado final, sino también en la forma de trabajar. Nuestra experiencia, junto con el compromiso y la pasión por nuestro oficio, nos permite garantizar acabados profesionales y duraderos, adaptándonos a cada proyecto, grande o pequeño.",
-        "parrafo2":"📍 Trabajamos en Cerdanyola del Vallès y alrededores, ofreciendo presupuestos sin compromiso y asesoramiento honesto desde el primer día.",
+        "parrafo2":"📍 Trabajamos en Barcelona, Vallès Oriental, Vallès Occidental, ofreciendo presupuestos sin compromiso y asesoramiento honesto desde el primer día.",
         "contacto-titulo":"Contacto",
         "telefono-text":"Teléfono: 622 62 98 80",
-        "zona-text":"Zona de trabajo: Cerdanyola del Vallès y alrededores",
+        "zona-text":"Zona de trabajo: Barcelona, Vallès Oriental, Vallès Occidental",
         "solicitar-btn":"📞 Solicitar presupuesto",
         "footer-text":"© 2026 Alda · Albañilería en Cerdanyola del Vallès"
     },
@@ -151,6 +182,9 @@ const textos = {
         "nav-proyectos":"Projects",
         "nav-contacto":"Contact",
         "servicios-titulo":"Our Services",
+        "idiomaEspanol":"Spanish",
+        "idiomaCatalan":"Catalan",
+        "idiomaIngles":"English",        
         "servicio-cocinas":"Kitchens",
         "servicio-banos":"Bathrooms",
         "servicio-reformas":"Renovations",
@@ -175,6 +209,9 @@ const textos = {
         "nav-proyectos":"Projectes",
         "nav-contacto":"Contacte",
         "servicios-titulo":"Els nostres serveis",
+        "idiomaEspanol":"Espanyol",
+        "idiomaCatalan":"Català",
+        "idiomaIngles":"Anglès",
         "servicio-cocinas":"Cuines",
         "servicio-banos":"Banys",
         "servicio-reformas":"Reformes",

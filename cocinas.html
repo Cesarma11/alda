@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -33,23 +34,32 @@
         <nav class="header-nav">
             <a href="index.html" id="nav-inicio">Inicio</a>
             <a href="quienSomos.html" id="nav-quienes">Quiénes somos</a>
-            <a href="#servicios" id="nav-servicios">Qué hacemos</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn" id="nav-servicios">
+                    <i class="fa-solid fa-hammer"></i> Qué hacemos ▼
+                </a>
+                <div class="dropdown-content">
+                    <a href="cocinas.html"><i class="fa-solid fa-kitchen-set"></i> Cocinas</a>
+                    <a href="banos.html"><i class="fa-solid fa-bath"></i> Baños</a>
+                    <a href="reformas.html"><i class="fa-solid fa-screwdriver-wrench"></i> Reformas</a>
+                    <a href="fachadas.html"><i class="fa-solid fa-building"></i> Fachadas</a>
+                </div>
+            </div>
             <a href="#proyectos" id="nav-proyectos">Proyectos</a>
             <a href="#contacto" id="nav-contacto">Contacto</a>
 
             <!-- Menú desplegable de idiomas -->
-            <!-- Menú desplegable de idiomas -->
             <div class="dropdown">
                 <a href="#" class="dropbtn">Idioma ▼</a>
                 <div class="dropdown-content">
-                    <a href="#" onclick="cambiarIdioma('es'); return false;">
-                        <img src="img/espanol.png" alt="Español"> Español
+                    <a href="#" data-lang="es" onclick="cambiarIdioma('es'); return false;">
+                        <img src="img/espanol.png" alt="Español"> <span class="nav-text" id="idiomaEspanol"></span>
                     </a>
-                    <a href="#" onclick="cambiarIdioma('cat'); return false;">
-                        <img src="img/catalan.png" alt="Català"> Català
+                    <a href="#" data-lang="cat" onclick="cambiarIdioma('cat'); return false;">
+                        <img src="img/catalan.png" alt="Català"> <span class="nav-text" id="idiomaCatalan"></span>
                     </a>            
-                    <a href="#" onclick="cambiarIdioma('en'); return false;">
-                        <img src="img/ingles.png" alt="English"> English
+                    <a href="#" data-lang="en" onclick="cambiarIdioma('en'); return false;">
+                        <img src="img/ingles.png" alt="English"> <span class="nav-text" id="idiomaIngles"></span>
                     </a>
                 </div>
             </div>
@@ -92,41 +102,89 @@
     <p id="footer-text">© 2026 Alda · Albañilería en Cerdanyola del Vallès</p>
     </footer>
 
-    <!------------------------------------- ZONA DE JAVASCRIPT------------------------------------------->
+ <!-- ========================= JAVASCRIPT ========================= -->
+<script>
+/* ===== REDUCIR HEADER EN SCROLL ===== */
+let lastScroll = 0;
+window.addEventListener("scroll", () => {
+    if (window.innerWidth > 768) return; 
+    const currentScroll = window.pageYOffset;
+    const header = document.querySelector("header");
+    if (currentScroll > lastScroll && currentScroll > 80) {
+        header.classList.add("hide");
+    } else {
+        header.classList.remove("hide");
+    }
+    lastScroll = currentScroll;
+});
 
-    <script>
-    /* ==========================
-    1️⃣ REDUCIR EL HEADER EN SCROLL
-    ========================== */
-    let lastScroll = 0;
-    window.addEventListener("scroll", () => {
-        if (window.innerWidth > 768) return; // solo móvil
-        const currentScroll = window.pageYOffset;
-        const header = document.querySelector("header");
-        if (currentScroll > lastScroll && currentScroll > 80) {
-            header.classList.add("hide");
+/* ===== MENU HAMBURGUESA ===== */
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".header-nav");
+menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menuToggle.classList.toggle("active");
+    nav.classList.toggle("active");
+});
+nav.addEventListener("click", e => e.stopPropagation());
+document.addEventListener("click", () => {
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+});
+
+/* ===== ANIMACIÓN LOGO ===== */
+function animarLogo() {
+    const logo = document.getElementById("logo-text");
+    const painter = document.getElementById("painter");
+    const letters = logo.textContent.split("");
+
+    logo.textContent = "";
+    letters.forEach(letter => {
+        const span = document.createElement("span");
+        span.textContent = letter;
+        if(letter === " ") {
+            span.style.display = "inline-block";
+            span.style.width = "0.5em";
         } else {
-            header.classList.remove("hide");
+            span.style.opacity = 0;
+            span.style.display = "inline-block";
         }
-        lastScroll = currentScroll;
+        logo.appendChild(span);
     });
 
-    /* ==========================
-    2️⃣ MENU HAMBURGUESA
-    ========================== */
-    const menuToggle = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".header-nav");
-    menuToggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        menuToggle.classList.toggle("active");
-        nav.classList.toggle("active");
-    });
-    nav.addEventListener("click", (e) => e.stopPropagation());
-    document.addEventListener("click", () => {
-        menuToggle.classList.remove("active");
-        nav.classList.remove("active");
-    });
+    const spans = logo.querySelectorAll("span");
+    let i = 0;
+    painter.style.opacity = 1;
+    painter.style.transition = "left 0.3s ease";
 
+    function pintarLetra() {
+        if(i >= spans.length){
+            painter.style.transition = "opacity 0.5s";
+            painter.style.opacity = 0;
+            return;
+        }
+        const span = spans[i];
+        const spanRect = span.getBoundingClientRect();
+        const headerRect = logo.parentElement.getBoundingClientRect();
+
+        setTimeout(() => {
+            if(span.textContent.trim() !== "") {
+                painter.style.left = (spanRect.left - headerRect.left) + "px";
+            }
+        }, 500);
+
+        setTimeout(()=>{
+            if(span.textContent.trim() !== "") {
+                span.style.transition = "opacity 0.3s, transform 0.1s";
+                span.style.opacity = 1;
+                span.style.transform = "translateY(0)";
+            }
+            i++;
+            pintarLetra();
+        }, 400);
+    }
+    setTimeout(pintarLetra, 100);
+}
     /* ==========================
     3️⃣ TEXTOS POR IDIOMA
     ========================== */
@@ -141,6 +199,10 @@
             "nav-proyectos":"Proyectos",
             "nav-contacto":"Contacto",
             "servicios-titulo":"Nuestros Servicios",
+            "idiomaEspanol":"Español",
+            "idiomaCatalan":"Catalán",
+            "idiomaIngles":"Ingles",
+
             "servicio-cocinas":"Cocinas",
             "servicio-banos":"Baños",
             "servicio-reformas":"Reformas",
@@ -171,6 +233,9 @@
             "nav-proyectos":"Projects",
             "nav-contacto":"Contact",
             "servicios-titulo":"Our Services",
+            "idiomaEspanol":"Spanish",
+            "idiomaCatalan":"Catalan",
+            "idiomaIngles":"English",
             "servicio-cocinas":"Kitchens",
             "servicio-banos":"Bathrooms",
             "servicio-reformas":"Renovations",
@@ -201,6 +266,9 @@
             "nav-proyectos":"Projectes",
             "nav-contacto":"Contacte",
             "servicios-titulo":"Els nostres serveis",
+            "idiomaEspanol":"Espanyol",
+            "idiomaCatalan":"Català",
+            "idiomaIngles":"Anglès",
             "servicio-cocinas":"Cuines",
             "servicio-banos":"Banys",
             "servicio-reformas":"Reformes",
@@ -223,198 +291,41 @@
         }
     };
 
-    /* ==========================
-    4️⃣ Animación del logo con pintor
-    ========================== */
-    function animarLogo() {
-        const logo = document.getElementById("logo-text");
-        const painter = document.getElementById("painter");
-        const letters = logo.textContent.split(""); // incluye espacios
+ 
+/* ===== FUNCIONES IDIOMA ===== */
+function resaltarIdioma(idioma) {
+    const enlaces = document.querySelectorAll(".dropdown-content a[data-lang]");
+    enlaces.forEach(a => a.classList.remove("active-language"));
+    const activo = document.querySelector(`.dropdown-content a[data-lang="${idioma}"]`);
+    if (activo) activo.classList.add("active-language");
+}
 
-        // Limpiar y crear spans
-        logo.textContent = "";
-        letters.forEach(letter => {
-            const span = document.createElement("span");
-            span.textContent = letter;
 
-            // si es espacio, darle ancho fijo
-            if(letter === " ") {
-                span.style.display = "inline-block";
-                span.style.width = "0.5em"; // ajusta el espacio entre palabras
-            } else {
-                span.style.opacity = 0;
-                span.style.display = "inline-block";
-            }
-
-            logo.appendChild(span);
-        });
-
-        const spans = logo.querySelectorAll("span");
-        let i = 0;
-        painter.style.opacity = 1;
-        painter.style.transition = "left 0.3s ease";
-
-    function pintarLetra() {
-        if(i >= spans.length){
-            // Desaparece al final
-            painter.style.transition = "opacity 0.5s";
-            painter.style.opacity = 0;
-            return;
-        }
-
-        const span = spans[i];
-        const spanRect = span.getBoundingClientRect();
-        const headerRect = logo.parentElement.getBoundingClientRect();
-
-        // Retrasar el movimiento del pintor ligeramente
-        setTimeout(() => {
-            if(span.textContent.trim() !== "") {
-                painter.style.left = (spanRect.left - headerRect.left) + "px";
-            }
-        }, 500); // retraso en ms, ajusta a tu gusto
-
-        setTimeout(()=>{
-            if(span.textContent.trim() !== "") {
-                span.style.transition = "opacity 0.3s, transform 0.1s";
-                span.style.opacity = 1;
-                span.style.transform = "translateY(0)";
-            }
-            i++;
-            pintarLetra();
-        }, 400);
-    }
-
-        // Pequeño delay para que painter tenga posición correcta
-        setTimeout(pintarLetra, 100);
-    }
-
-    /* ==========================
-    5️⃣ Función para cambiar idioma
-    ========================== */
-    // ==========================
-    // 3️⃣ Función para cambiar idioma (cierra menú hamburguesa en móvil)
-    // ==========================
-    function cambiarIdioma(idioma) {
-        // Cambiar todos los textos
-        for (let id in textos[idioma]) {
-            const elemento = document.getElementById(id);
-            if (!elemento) continue;
-
-            if (id === "logo-text") {
-                elemento.textContent = textos[idioma][id];
-                animarLogo();
-            } else {
-                elemento.textContent = textos[idioma][id];
-            }
-        }
-
-        // Guardar idioma
-        localStorage.setItem("idioma", idioma);
-
-        // Cerrar menú hamburguesa si está activo
-        const menuToggle = document.querySelector(".menu-toggle");
-        const nav = document.querySelector(".header-nav");
-        if (menuToggle.classList.contains("active")) {
-            menuToggle.classList.remove("active");
-            nav.classList.remove("active");
+function cambiarIdioma(idioma){
+    for (let id in textos[idioma]) {
+        const elemento = document.getElementById(id);
+        if(!elemento) continue;
+        if(id === "logo-text") {
+            elemento.textContent = textos[idioma][id];
+            animarLogo();
+        } else {
+            elemento.textContent = textos[idioma][id];
         }
     }
+    localStorage.setItem("idioma", idioma);
+    resaltarIdioma(idioma);
+    document.querySelector(".menu-toggle").classList.remove("active");
+    document.querySelector(".header-nav").classList.remove("active");
+}
 
-    /* ==========================
-    6️⃣ Inicializar idioma al cargar la página
-    ========================== */
-    document.addEventListener("DOMContentLoaded", () => {
-        const idiomaGuardado = localStorage.getItem("idioma") || "es";
-        setTimeout(()=>cambiarIdioma(idiomaGuardado), 50);
-    });
+/* ===== INICIALIZAR IDIOMA ===== */
+document.addEventListener("DOMContentLoaded", () => {
+    const idiomaGuardado = localStorage.getItem("idioma") || "es";
+    setTimeout(() => cambiarIdioma(idiomaGuardado), 50);
+    animarLogo();
+});
+</script>
 
-    // ==========================
-    // 5️⃣ Cerrar menú hamburguesa al seleccionar idioma
-    // ==========================
-    document.querySelectorAll(".dropdown-content a").forEach(link => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const idioma = link.getAttribute("onclick").match(/'(.*?)'/)[1]; // extrae 'es','en','cat'
-            cambiarIdioma(idioma);
-
-            // Cerrar hamburguesa y menú
-            document.querySelector(".menu-toggle").classList.remove("active");
-            document.querySelector(".header-nav").classList.remove("active");
-
-            // Cerrar dropdown
-            document.querySelector(".dropdown-content").classList.remove("show");
-        });
-    });
-
-    // También hacemos que el botón desplegable funcione en móvil
-    const dropBtn = document.querySelector(".dropbtn");
-    const dropdownContent = document.querySelector(".dropdown-content");
-
-    dropBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        dropdownContent.classList.toggle("show");
-    });
-
-    document.querySelectorAll(".dropdown-content a").forEach(link => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const idioma = link.getAttribute("onclick").match(/'(.*?)'/)[1]; // extrae 'es','en','cat'
-            cambiarIdioma(idioma);
-
-            // Cerrar hamburguesa y menú
-            document.querySelector(".menu-toggle").classList.remove("active");
-            document.querySelector(".header-nav").classList.remove("active");
-            dropdownContent.classList.remove("show");
-
-            // Resaltar idioma seleccionado
-            document.querySelectorAll(".dropdown-content a").forEach(a => a.classList.remove("active-language"));
-            link.classList.add("active-language");
-        });
-    });
-    // Función para resaltar el idioma activo
-    function resaltarIdioma(idioma) {
-        document.querySelectorAll(".dropdown-content a").forEach(a => {
-            a.classList.remove("active-language");
-            const linkIdioma = a.getAttribute("onclick").match(/'(.*?)'/)[1];
-            if(linkIdioma === idioma) {
-                a.classList.add("active-language");
-            }
-        });
-    }
-
-    // Modificamos cambiarIdioma para que también resalte
-    function cambiarIdioma(idioma){
-        for (let id in textos[idioma]) {
-            const elemento = document.getElementById(id);
-            if(!elemento) continue;
-
-            if(id === "logo-text"){
-                elemento.textContent = textos[idioma][id];
-                animarLogo();
-            } else {
-                elemento.textContent = textos[idioma][id];
-            }
-        }
-        localStorage.setItem("idioma", idioma);
-
-        // Resaltar el idioma seleccionado
-        resaltarIdioma(idioma);
-
-        // Cerrar menú hamburguesa
-        document.querySelector(".menu-toggle").classList.remove("active");
-        document.querySelector(".header-nav").classList.remove("active");
-        const dropdownContent = document.querySelector(".dropdown-content");
-        if(dropdownContent) dropdownContent.classList.remove("show");
-    }
-
-    // Al cargar la página
-    document.addEventListener("DOMContentLoaded", () => {
-        const idiomaGuardado = localStorage.getItem("idioma") || "es";
-        setTimeout(() => {
-            cambiarIdioma(idiomaGuardado); // esto ahora también resalta el idioma correcto
-        }, 50);
-    });
-    </script>
 
 </body>
 </html>

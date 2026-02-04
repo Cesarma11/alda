@@ -484,9 +484,10 @@ footer {
     display: flex;
   }
 
-  /* Dropdown de idiomas dentro del menú móvil */
+  /* Dropdown desplegable de idiomas dentro del menú móvil */
   .dropdown {
-    position: relative;        /* relativo dentro del nav */
+    position: relative; 
+    display: inline-block;       /* relativo dentro del nav */
   }
 
   .dropdown-content {
@@ -505,6 +506,7 @@ footer {
       display: block;
   }
   
+
   .dropdown-content a {
     display: block;
     padding: 8px 12px;
@@ -679,3 +681,4 @@ footer {
     width: 100%;
   }
 }
+
