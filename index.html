@@ -14,64 +14,9 @@
 
 <body>
 
-<!-- ========================= HEADER ========================= -->
-<header id="main-header">
-    <div class="header-content" style="position: relative;">
-        <a href="index.html" style="text-decoration:none">
-            <h1 id="logo-text">Construc,Alda</h1>
-        </a>
-        <img id="painter" src="img/pintor2.gif" alt="Pintor animado">
-        <div class="iconos">🧱 🔨 🏗️</div>
-        <a href="tel:622629880" class="btn" id="llamar-btn">📞 Llamar ahora 622 62 98 80</a>
-    </div>
+<div id="header"></div>
 
-    <button class="menu-toggle" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
 
-    <a href="https://wa.me/622629880?text=Hola,%20quiero%20información%20sobre%20mi%20proyecto" 
-        target="_blank" class="whatsapp-float" style="text-decoration: none;">
-        <img src="./img/whatsApp.png" alt="WhatsApp">
-        <span class="whatsapp-text" id="whatsapp-text">Envíanos un WhatsApp</span>
-    </a>
-
-    <nav class="header-nav">
-        <a href="index.html" id="nav-inicio">Inicio</a>
-        <a href="quienSomos.html" id="nav-quienes">Quiénes somos</a>
-        <div class="dropdown">
-            <a href="#" class="dropbtn" id="nav-servicios">
-                <i class="fa-solid fa-hammer"></i> Qué hacemos ▼
-            </a>
-            <div class="dropdown-content">
-                <a href="cocinas.html"><i class="fa-solid fa-kitchen-set"></i> Cocinas</a>
-                <a href="banos.html"><i class="fa-solid fa-bath"></i> Baños</a>
-                <a href="reformas.html"><i class="fa-solid fa-screwdriver-wrench"></i> Reformas</a>
-                <a href="fachadas.html"><i class="fa-solid fa-building"></i> Fachadas</a>
-            </div>
-        </div>
-
-        <a href="#proyectos" id="nav-proyectos">Proyectos</a>
-        <a href="#contacto" id="nav-contacto">Contacto</a>
-
-        <!-- Idiomas -->
-        <div class="dropdown">
-            <a href="#" class="dropbtn">Idioma ▼</a>
-            <div class="dropdown-content">
-                <a href="#" data-lang="es" onclick="cambiarIdioma('es'); return false;">
-                    <img src="img/espanol.png" alt="Español"> <span class="nav-text" id="idiomaEspanol"></span>
-                </a>
-                <a href="#" data-lang="cat" onclick="cambiarIdioma('cat'); return false;">
-                    <img src="img/catalan.png" alt="Català"> <span class="nav-text" id="idiomaCatalan"></span>
-                </a>            
-                <a href="#" data-lang="en" onclick="cambiarIdioma('en'); return false;">
-                    <img src="img/ingles.png" alt="English"> <span class="nav-text" id="idiomaIngles"></span>
-                </a>
-            </div>
-        </div>
-    </nav>
-</header>
 
 <!-- ========================= SECCIÓN SERVICIOS ========================= -->
 <section class="servicios">
@@ -156,88 +101,61 @@
 </footer>
 
 <!-- ========================= JAVASCRIPT ========================= -->
-<script>
-/* ===== REDUCIR HEADER EN SCROLL ===== */
-let lastScroll = 0;
-window.addEventListener("scroll", () => {
-    if (window.innerWidth > 768) return; 
-    const currentScroll = window.pageYOffset;
-    const header = document.querySelector("header");
-    if (currentScroll > lastScroll && currentScroll > 80) {
-        header.classList.add("hide");
-    } else {
-        header.classList.remove("hide");
-    }
-    lastScroll = currentScroll;
-});
 
-/* ===== MENU HAMBURGUESA ===== */
-const menuToggle = document.querySelector(".menu-toggle");
-const nav = document.querySelector(".header-nav");
-menuToggle.addEventListener("click", (e) => {
+<script>
+fetch("header.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("header").innerHTML = html;
+    inicializarHeader();
+  });
+
+function inicializarHeader() {
+
+  /* ===== MENU HAMBURGUESA ===== */
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+
+if (menuToggle && nav) {
+  menuToggle.addEventListener("click", e => {
     e.stopPropagation();
     menuToggle.classList.toggle("active");
     nav.classList.toggle("active");
-});
-nav.addEventListener("click", e => e.stopPropagation());
-document.addEventListener("click", () => {
+  });
+
+  nav.addEventListener("click", e => e.stopPropagation()); // evita que clics dentro del nav cierren el menú
+  document.addEventListener("click", () => {
     menuToggle.classList.remove("active");
     nav.classList.remove("active");
-});
-
-/* ===== ANIMACIÓN LOGO ===== */
-function animarLogo() {
-    const logo = document.getElementById("logo-text");
-    const painter = document.getElementById("painter");
-    const letters = logo.textContent.split("");
-
-    logo.textContent = "";
-    letters.forEach(letter => {
-        const span = document.createElement("span");
-        span.textContent = letter;
-        if(letter === " ") {
-            span.style.display = "inline-block";
-            span.style.width = "0.5em";
-        } else {
-            span.style.opacity = 0;
-            span.style.display = "inline-block";
-        }
-        logo.appendChild(span);
-    });
-
-    const spans = logo.querySelectorAll("span");
-    let i = 0;
-    painter.style.opacity = 1;
-    painter.style.transition = "left 0.3s ease";
-
-    function pintarLetra() {
-        if(i >= spans.length){
-            painter.style.transition = "opacity 0.5s";
-            painter.style.opacity = 0;
-            return;
-        }
-        const span = spans[i];
-        const spanRect = span.getBoundingClientRect();
-        const headerRect = logo.parentElement.getBoundingClientRect();
-
-        setTimeout(() => {
-            if(span.textContent.trim() !== "") {
-                painter.style.left = (spanRect.left - headerRect.left) + "px";
-            }
-        }, 500);
-
-        setTimeout(()=>{
-            if(span.textContent.trim() !== "") {
-                span.style.transition = "opacity 0.3s, transform 0.1s";
-                span.style.opacity = 1;
-                span.style.transform = "translateY(0)";
-            }
-            i++;
-            pintarLetra();
-        }, 400);
-    }
-    setTimeout(pintarLetra, 100);
+  });
+  
+  const dropdown = document.querySelector(".dropdown");
+  if (dropdown) {
+    dropdown.addEventListener("click", e => e.stopPropagation()); // evita que clic en idiomas cierre el menú
+  }
 }
+
+
+  /* ===== EVENTOS IDIOMAS ===== */
+  document.querySelectorAll(".dropdown-content a[data-lang]").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      cambiarIdioma(link.dataset.lang);
+      animarLogo(); // ✅ si quieres que se repita al cambiar idioma
+    });
+  });
+
+  /* ===== IDIOMA INICIAL ===== */
+  const idiomaGuardado = localStorage.getItem("idioma") || "es";
+  cambiarIdioma(idiomaGuardado);
+  resaltarIdioma(idiomaGuardado);
+
+  /* ===== ANIMACIÓN LOGO ===== */
+  animarLogo();
+}
+</script>
+
+<script>
 
 /* ===== TEXTOS POR IDIOMA ===== */
 const textos = {
@@ -245,7 +163,7 @@ const textos = {
           "nav-inicio":"Inicio","nav-quienes":"Quiénes somos","nav-servicios":"Qué hacemos","nav-proyectos":"Proyectos","nav-contacto":"Contacto",
           "servicios-titulo":"Nuestros Servicios","idiomaEspanol":"Español","idiomaCatalan":"Catalán","idiomaIngles":"Inglés",
           "servicio-cocinas":"Cocinas","servicio-banos":"Baños","servicio-reformas":"Reformas","servicio-fachadas":"Fachadas",
-          "por-que-titulo":"Por qué elegir Aldaba","razon1":"✔ Empresa local en Cerdanyola del Vallès","razon2":"✔ Presupuesto sin compromiso",
+          "por-que-titulo":"Por qué elegir Construc,ALDA","razon1":"✔ Empresa local en Cerdanyola del Vallès","razon2":"✔ Presupuesto sin compromiso",
           "razon3":"✔ Seriedad y acabados de calidad","razon4":"✔ Atención personalizada","trabajos-titulo":"Trabajos realizados",
           "contacto-titulo":"Contacto","telefono-text":"Teléfono: 622 62 98 80","zona-text":"Zona de trabajo: Barcelona, Vallès Oriental y Vallès Occidental",
           "solicitar-btn":"📞 Solicitar presupuesto","form-titulo":"PONTE EN CONTACTO CON NOSOTROS",
@@ -277,37 +195,91 @@ const textos = {
 };
 
 /* ===== FUNCIONES IDIOMA ===== */
-function resaltarIdioma(idioma) {
-    const enlaces = document.querySelectorAll(".dropdown-content a[data-lang]");
-    enlaces.forEach(a => a.classList.remove("active-language"));
-    const activo = document.querySelector(`.dropdown-content a[data-lang="${idioma}"]`);
-    if (activo) activo.classList.add("active-language");
-}
 
+function resaltarIdioma(idioma) {
+  const enlaces = document.querySelectorAll(".dropdown-content a[data-lang]");
+  enlaces.forEach(a => a.classList.remove("active-language"));
+  const activo = document.querySelector(`.dropdown-content a[data-lang="${idioma}"]`);
+  if (activo) activo.classList.add("active-language");
+}
 
 function cambiarIdioma(idioma){
-    for (let id in textos[idioma]) {
-        const elemento = document.getElementById(id);
-        if(!elemento) continue;
-        if(id === "logo-text") {
-            elemento.textContent = textos[idioma][id];
-            animarLogo();
-        } else {
-            elemento.textContent = textos[idioma][id];
-        }
+  for (let id in textos[idioma]) {
+    const elemento = document.getElementById(id);
+    if (!elemento) continue;
+
+    elemento.textContent = textos[idioma][id];
+  }
+
+  localStorage.setItem("idioma", idioma);
+  resaltarIdioma(idioma);
+
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+  if(menuToggle && nav){
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+  }
+}
+/* animar Logo*/
+function animarLogo() {
+  const logo = document.getElementById("logo-text");
+  const painter = document.getElementById("painter");
+  if (!logo || !painter) return;
+
+  const texto = logo.textContent.trim();
+  if (!texto) return;
+
+  logo.textContent = "";
+  const letters = texto.split("");
+
+  letters.forEach(letter => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    span.style.display = "inline-block";
+    span.style.opacity = 0;
+    span.style.transform = "translateY(0)";
+    span.style.lineHeight = "1";
+    logo.appendChild(span);
+  });
+
+  const spans = logo.querySelectorAll("span");
+  let i = 0;
+  painter.style.opacity = 1;
+  painter.style.transition = "left 0.3s ease";
+
+  function pintarLetra() {
+    if (i >= spans.length) {
+      painter.style.transition = "opacity 0.5s";
+      painter.style.opacity = 0;
+      return;
     }
-    localStorage.setItem("idioma", idioma);
-    resaltarIdioma(idioma);
-    document.querySelector(".menu-toggle").classList.remove("active");
-    document.querySelector(".header-nav").classList.remove("active");
+
+    const span = spans[i];
+    const spanRect = span.getBoundingClientRect();
+    const headerRect = logo.parentElement.getBoundingClientRect();
+
+    // 🌟 Primer letra: mover pintor antes de mostrarla
+    if (i === 0) {
+      painter.style.left = (spanRect.left - headerRect.left) + "px";
+    }
+
+    // 🌟 Aparecer letra
+    span.style.opacity = 1;
+
+    // 🌟 Mover pintor ligeramente después (para efecto de pintar)
+    setTimeout(() => {
+      if (i !== 0) {
+        painter.style.left = (spanRect.left - headerRect.left) + "px";
+      }
+      i++;
+      pintarLetra();
+    }, 300); // retraso ajustable para sincronización
+  }
+
+  setTimeout(pintarLetra, 100);
 }
 
-/* ===== INICIALIZAR IDIOMA ===== */
-document.addEventListener("DOMContentLoaded", () => {
-    const idiomaGuardado = localStorage.getItem("idioma") || "es";
-    setTimeout(() => cambiarIdioma(idiomaGuardado), 50);
-    animarLogo();
-});
 </script>
 
 </body>
