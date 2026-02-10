@@ -3,86 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Albañilería en Cerdanyola del Vallès | Alda</title>
+  <link rel="icon" type="image/png" href="img/iconoAlbañil.png">
   <meta name="description" content="Empresa de albañilería en Cerdanyola del Vallès. Reformas, obras y trabajos profesionales. Presupuesto sin compromiso.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-<header id="main-header">
-    <div class="header-content" style="position: relative;">
-        <a href="index.html" style="text-decoration:none"><h1 id="logo-text">Construcciones&nbsp;&nbsp;ALDA</h1></a>
-        <img id="painter" src="img/pintor2.gif" alt="Pintor animado">
-        <div class="iconos">🧱 🔨 🏗️</div>
-        <a href="tel:622629880" class="btn" id="llamar-btn">📞 Llamar ahora 622 62 98 80</a>
-    </div>
-
-    <button class="menu-toggle" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-    <a href="https://wa.me/622629880?text=Hola,%20quiero%20información%20sobre%20mi%20proyecto" 
-        target="_blank" class="whatsapp-float" style="text-decoration: none;">
-        <img src="./img/whatsApp.png" alt="WhatsApp">
-        <span class="whatsapp-text" id="whatsapp-text">Envíanos un WhatsApp</span>
-    </a>
-
-<nav class="header-nav">
-    <a href="index.html" id="nav-inicio">Inicio</a>
-    <a href="quienSomos.html" id="nav-quienes">Quiénes somos</a>
-            <div class="dropdown">
-                <a href="#" class="dropbtn" id="nav-servicios">
-                    <i class="fa-solid fa-hammer"></i> Qué hacemos ▼
-                </a>
-                <div class="dropdown-content">
-                    <a href="cocinas.html" >
-                        <i class="fa-solid fa-kitchen-set"></i> 
-                        <span class="nav-text"id="nav-queCocinas"></span>
-                    </a>
-                    <a href="banos.html" >
-                        <i class="fa-solid fa-bath"></i>
-                        <span class="nav-text"id="nav-queBanos"></span>
-                    </a>
-                    <a href="reformas.html" >
-                        <i class="fa-solid fa-screwdriver-wrench"></i> 
-                        <span class="nav-text"id="nav-queReformas"></span>
-                    </a>
-                    <a href="fachadas.html" >
-                        <i class="fa-solid fa-building"></i>
-                        <span class="nav-text"id="nav-queFachadas"></span>
-                    </a>
-
-                </div>
-            </div>
-    <a href="#proyectos" id="nav-proyectos">Proyectos</a>
-    <a href="#contacto" id="nav-contacto">Contacto</a>
-
-    <!-- Menú desplegable de idiomas -->
-    <!-- Menú desplegable de idiomas -->
-            <div class="dropdown">
-                <a href="#" class="dropbtn">Idioma ▼</a>
-                <div class="dropdown-content">
-                    <a href="#" onclick="cambiarIdioma('es'); return false;">
-                        <img src="img/espanol.png" alt="Español"> <span class="nav-text" id="idiomaEspanol"></span>
-                    </a>
-                    <a href="#" onclick="cambiarIdioma('cat'); return false;">
-                        <img src="img/catalan.png" alt="Català"> <span class="nav-text" id="idiomaCatalan"></span>
-                    </a>            
-                    <a href="#" onclick="cambiarIdioma('en'); return false;">
-                        <img src="img/ingles.png" alt="English"> <span class="nav-text" id="idiomaIngles"></span>
-                    </a>
-                </div>
-            </div>
-
-</nav>
-
-</header>
-
+<div id="header"></div>
 
 
 <section>
@@ -103,40 +34,59 @@
 <p id="footer-text">© 2026 Alda · Albañilería en Cerdanyola del Vallès</p>
 </footer>
 
-<!------------------------------------- ZONA DE JAVASCRIPT------------------------------------------->
+<!-- ========================= JAVASCRIPT ========================= -->
 
 <script>
-/* ==========================
-   1️⃣ REDUCIR EL HEADER EN SCROLL
-   ========================== */
-let lastScroll = 0;
-window.addEventListener("scroll", () => {
-    if (window.innerWidth > 768) return; // solo móvil
-    const currentScroll = window.pageYOffset;
-    const header = document.querySelector("header");
-    if (currentScroll > lastScroll && currentScroll > 80) {
-        header.classList.add("hide");
-    } else {
-        header.classList.remove("hide");
-    }
-    lastScroll = currentScroll;
-});
+fetch("header.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("header").innerHTML = html;
+    inicializarHeader();
+  });
 
-/* ==========================
-   2️⃣ MENU HAMBURGUESA
-   ========================== */
-const menuToggle = document.querySelector(".menu-toggle");
-const nav = document.querySelector(".header-nav");
-menuToggle.addEventListener("click", (e) => {
+function inicializarHeader() {
+
+  /* ===== MENU HAMBURGUESA ===== */
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+
+if (menuToggle && nav) {
+  menuToggle.addEventListener("click", e => {
     e.stopPropagation();
     menuToggle.classList.toggle("active");
     nav.classList.toggle("active");
-});
-nav.addEventListener("click", (e) => e.stopPropagation());
-document.addEventListener("click", () => {
+  });
+
+  nav.addEventListener("click", e => e.stopPropagation()); // evita que clics dentro del nav cierren el menú
+  document.addEventListener("click", () => {
     menuToggle.classList.remove("active");
     nav.classList.remove("active");
-});
+  });
+  
+  const dropdown = document.querySelector(".dropdown");
+  if (dropdown) {
+    dropdown.addEventListener("click", e => e.stopPropagation()); // evita que clic en idiomas cierre el menú
+  }
+}
+
+
+  /* ===== EVENTOS IDIOMAS ===== */
+  document.querySelectorAll(".dropdown-content a[data-lang]").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      cambiarIdioma(link.dataset.lang);
+      animarLogo(); // ✅ si quieres que se repita al cambiar idioma
+    });
+  });
+
+  /* ===== IDIOMA INICIAL ===== */
+  const idiomaGuardado = localStorage.getItem("idioma") || "es";
+  cambiarIdioma(idiomaGuardado);
+  resaltarIdioma(idiomaGuardado);
+
+  /* ===== ANIMACIÓN LOGO ===== */
+  animarLogo();
+}
 
 /* ==========================
    3️⃣ TEXTOS POR IDIOMA
@@ -173,7 +123,7 @@ const textos = {
         "footer-text":"© 2026 Alda · Albañilería en Cerdanyola del Vallès"
     },
     en: {
-        "logo-text":"ALDA Constructions",
+        "logo-text":"Construc,ALDA",
         "llamar-btn":"📞 Call now 622 62 98 80",
         "whatsapp-text":"Send us a WhatsApp",
         "nav-inicio":"Star",
@@ -200,7 +150,7 @@ const textos = {
         "footer-text":"© 2026 Alda · Construction in Cerdanyola del Vallès"
     },
     cat: {
-        "logo-text":"Construccions ALDA",
+        "logo-text":"Construc,ALDA",
         "llamar-btn":"📞 Truca ara 622 62 98 80",
         "whatsapp-text":"Envia’ns un WhatsApp",
         "nav-inicio":"Inici",        
@@ -216,7 +166,7 @@ const textos = {
         "servicio-banos":"Banys",
         "servicio-reformas":"Reformes",
         "servicio-fachadas":"Façanes",
-        "por-que-titulo":"Per què triar Construccions ALDA",
+        "por-que-titulo":"Per què triar Construc,ALDA",
         "parrafo":"Som una empresa de paleta amb més de 15 anys d'experiència al sector, especialitzada en reformes, obres i treballs de construcció en habitatges i locals. Durant tots aquests anys hem treballat amb un objectiu clar: oferir resultats de qualitat, serietat i confiança a cada projecte. Ens caracteritzem per un tracte proper i personalitzat, escoltant sempre les necessitats de cada client per aportar la millor solució, cuidant els detalls i complint els terminis acordats. Creiem que una bona feina no només es veu en el resultat final, sinó també en la manera de treballar. La nostra experiència, juntament amb el compromís i la passió pel nostre ofici, ens permet garantir acabats professionals i duradors, adaptant-nos a cada projecte, gran o petit.",
         "parrafo2":"📍 Treballem a Cerdanyola del Vallès i rodalies, oferint pressupostos sense compromís i assessorament honest des del primer dia",
         "contacto-titulo":"Contacte",
@@ -228,200 +178,91 @@ const textos = {
     }
 };
 
-/* ==========================
-   4️⃣ Animación del logo con pintor
-   ========================== */
+/* ===== FUNCIONES IDIOMA ===== */
+
+function resaltarIdioma(idioma) {
+  const enlaces = document.querySelectorAll(".dropdown-content a[data-lang]");
+  enlaces.forEach(a => a.classList.remove("active-language"));
+  const activo = document.querySelector(`.dropdown-content a[data-lang="${idioma}"]`);
+  if (activo) activo.classList.add("active-language");
+}
+
+function cambiarIdioma(idioma){
+  for (let id in textos[idioma]) {
+    const elemento = document.getElementById(id);
+    if (!elemento) continue;
+
+    elemento.textContent = textos[idioma][id];
+  }
+
+  localStorage.setItem("idioma", idioma);
+  resaltarIdioma(idioma);
+
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+  if(menuToggle && nav){
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+  }
+}
+/* animar Logo*/
 function animarLogo() {
-    const logo = document.getElementById("logo-text");
-    const painter = document.getElementById("painter");
-    const letters = logo.textContent.split(""); // incluye espacios
+  const logo = document.getElementById("logo-text");
+  const painter = document.getElementById("painter");
+  if (!logo || !painter) return;
 
-    // Limpiar y crear spans
-    logo.textContent = "";
-    letters.forEach(letter => {
-        const span = document.createElement("span");
-        span.textContent = letter;
+  const texto = logo.textContent.trim();
+  if (!texto) return;
 
-        // si es espacio, darle ancho fijo
-        if(letter === " ") {
-            span.style.display = "inline-block";
-            span.style.width = "0.5em"; // ajusta el espacio entre palabras
-        } else {
-            span.style.opacity = 0;
-            span.style.display = "inline-block";
-        }
+  logo.textContent = "";
+  const letters = texto.split("");
 
-        logo.appendChild(span);
-    });
+  letters.forEach(letter => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    span.style.display = "inline-block";
+    span.style.opacity = 0;
+    span.style.transform = "translateY(0)";
+    span.style.lineHeight = "1";
+    logo.appendChild(span);
+  });
 
-    const spans = logo.querySelectorAll("span");
-    let i = 0;
-    painter.style.opacity = 1;
-    painter.style.transition = "left 0.3s ease";
+  const spans = logo.querySelectorAll("span");
+  let i = 0;
+  painter.style.opacity = 1;
+  painter.style.transition = "left 0.3s ease";
 
-function pintarLetra() {
-    if(i >= spans.length){
-        // Desaparece al final
-        painter.style.transition = "opacity 0.5s";
-        painter.style.opacity = 0;
-        return;
+  function pintarLetra() {
+    if (i >= spans.length) {
+      painter.style.transition = "opacity 0.5s";
+      painter.style.opacity = 0;
+      return;
     }
 
     const span = spans[i];
     const spanRect = span.getBoundingClientRect();
     const headerRect = logo.parentElement.getBoundingClientRect();
 
-    // Retrasar el movimiento del pintor ligeramente
+    // 🌟 Primer letra: mover pintor antes de mostrarla
+    if (i === 0) {
+      painter.style.left = (spanRect.left - headerRect.left) + "px";
+    }
+
+    // 🌟 Aparecer letra
+    span.style.opacity = 1;
+
+    // 🌟 Mover pintor ligeramente después (para efecto de pintar)
     setTimeout(() => {
-        if(span.textContent.trim() !== "") {
-            painter.style.left = (spanRect.left - headerRect.left) + "px";
-        }
-    }, 500); // retraso en ms, ajusta a tu gusto
+      if (i !== 0) {
+        painter.style.left = (spanRect.left - headerRect.left) + "px";
+      }
+      i++;
+      pintarLetra();
+    }, 300); // retraso ajustable para sincronización
+  }
 
-    setTimeout(()=>{
-        if(span.textContent.trim() !== "") {
-            span.style.transition = "opacity 0.3s, transform 0.1s";
-            span.style.opacity = 1;
-            span.style.transform = "translateY(0)";
-        }
-        i++;
-        pintarLetra();
-    }, 400);
+  setTimeout(pintarLetra, 100);
 }
-
-
-    // Pequeño delay para que painter tenga posición correcta
-    setTimeout(pintarLetra, 100);
-}
-
-
-/* ==========================
-   5️⃣ Función para cambiar idioma
-   ========================== */
-// ==========================
-// 3️⃣ Función para cambiar idioma (cierra menú hamburguesa en móvil)
-// ==========================
-function cambiarIdioma(idioma) {
-    // Cambiar todos los textos
-    for (let id in textos[idioma]) {
-        const elemento = document.getElementById(id);
-        if (!elemento) continue;
-
-        if (id === "logo-text") {
-            elemento.textContent = textos[idioma][id];
-            animarLogo();
-        } else {
-            elemento.textContent = textos[idioma][id];
-        }
-    }
-
-    // Guardar idioma
-    localStorage.setItem("idioma", idioma);
-
-    // Cerrar menú hamburguesa si está activo
-    const menuToggle = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".header-nav");
-    if (menuToggle.classList.contains("active")) {
-        menuToggle.classList.remove("active");
-        nav.classList.remove("active");
-    }
-}
-
-/* ==========================
-   6️⃣ Inicializar idioma al cargar la página
-   ========================== */
-document.addEventListener("DOMContentLoaded", () => {
-    const idiomaGuardado = localStorage.getItem("idioma") || "es";
-    setTimeout(()=>cambiarIdioma(idiomaGuardado), 50);
-});
-
-// ==========================
-// 5️⃣ Cerrar menú hamburguesa al seleccionar idioma
-// ==========================
-document.querySelectorAll(".dropdown-content a").forEach(link => {
-    link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const idioma = link.getAttribute("onclick").match(/'(.*?)'/)[1]; // extrae 'es','en','cat'
-        cambiarIdioma(idioma);
-
-        // Cerrar hamburguesa y menú
-        document.querySelector(".menu-toggle").classList.remove("active");
-        document.querySelector(".header-nav").classList.remove("active");
-
-        // Cerrar dropdown
-        document.querySelector(".dropdown-content").classList.remove("show");
-    });
-});
-
-// También hacemos que el botón desplegable funcione en móvil
-const dropBtn = document.querySelector(".dropbtn");
-const dropdownContent = document.querySelector(".dropdown-content");
-
-dropBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    dropdownContent.classList.toggle("show");
-});
-
-document.querySelectorAll(".dropdown-content a").forEach(link => {
-    link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const idioma = link.getAttribute("onclick").match(/'(.*?)'/)[1]; // extrae 'es','en','cat'
-        cambiarIdioma(idioma);
-
-        // Cerrar hamburguesa y menú
-        document.querySelector(".menu-toggle").classList.remove("active");
-        document.querySelector(".header-nav").classList.remove("active");
-        dropdownContent.classList.remove("show");
-
-        // Resaltar idioma seleccionado
-        document.querySelectorAll(".dropdown-content a").forEach(a => a.classList.remove("active-language"));
-        link.classList.add("active-language");
-    });
-});
-// Función para resaltar el idioma activo
-function resaltarIdioma(idioma) {
-    document.querySelectorAll(".dropdown-content a").forEach(a => {
-        a.classList.remove("active-language");
-        const linkIdioma = a.getAttribute("onclick").match(/'(.*?)'/)[1];
-        if(linkIdioma === idioma) {
-            a.classList.add("active-language");
-        }
-    });
-}
-
-// Modificamos cambiarIdioma para que también resalte
-function cambiarIdioma(idioma){
-    for (let id in textos[idioma]) {
-        const elemento = document.getElementById(id);
-        if(!elemento) continue;
-
-        if(id === "logo-text"){
-            elemento.textContent = textos[idioma][id];
-            animarLogo();
-        } else {
-            elemento.textContent = textos[idioma][id];
-        }
-    }
-    localStorage.setItem("idioma", idioma);
-
-    // Resaltar el idioma seleccionado
-    resaltarIdioma(idioma);
-
-    // Cerrar menú hamburguesa
-    document.querySelector(".menu-toggle").classList.remove("active");
-    document.querySelector(".header-nav").classList.remove("active");
-    const dropdownContent = document.querySelector(".dropdown-content");
-    if(dropdownContent) dropdownContent.classList.remove("show");
-}
-
-// Al cargar la página
-document.addEventListener("DOMContentLoaded", () => {
-    const idiomaGuardado = localStorage.getItem("idioma") || "es";
-    setTimeout(() => {
-        cambiarIdioma(idiomaGuardado); // esto ahora también resalta el idioma correcto
-    }, 50);
-});
-
 
 </script>
 

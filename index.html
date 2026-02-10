@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Albañilería en Cerdanyola del Vallès | Alda</title>
+  <link rel="icon" type="image/png" href="img/iconoAlbañil.png">
   <meta name="description" content="Empresa de albañilería en Cerdanyola del Vallès. Reformas, obras y trabajos profesionales. Presupuesto sin compromiso.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -28,15 +29,31 @@
         </a>
         <a href="banos.html" class="servicio-card">
             <img src="img/baños/aseo1.jpg" alt="Baños">
-            <h3 id="servicio-banos">Baños</h3>
+            <h3 id="servicio-banos"></h3>
         </a>
         <a href="reformas.html" class="servicio-card">
             <img src="img/reformas/reforma1.jpg" alt="Reformas">
-            <h3 id="servicio-reformas">Reformas</h3>
+            <h3 id="servicio-reformas"></h3>
         </a>
         <a href="construccion.html" class="servicio-card">
             <img src="img/fachadas/fachada1.jpg" alt="Fachadas">
-            <h3 id="servicio-fachadas">Fachadas</h3>
+            <h3 id="servicio-fachadas"></h3>
+        </a>
+        <a href="comunidades.html" class="servicio-card">
+            <img src="img/comunidadIcono.png" alt="Comunidades">
+            <h3 id="servicio-comunidades"></h3>
+        </a>
+        <a href="construccion.html" class="servicio-card">
+            <img src="img/localComercial.png" alt="locales">
+            <h3 id="servicio-locales"></h3>
+        </a>
+        <a href="construccion.html" class="servicio-card">
+            <img src="img/oficina.jpg" alt="Fachadas">
+            <h3 id="servicio-oficinas">Reforma Oficinas</h3>
+        </a>
+        <a href="construccion.html" class="servicio-card">
+            <img src="img/alquiler.jpg" alt="Alquilar">
+            <h3 id="servicio-alquilar"></h3>
         </a>
     </div>
 </section>
@@ -52,7 +69,7 @@
     </ul>
 </section>
 
-<!-- ========================= SECCIÓN TRABAJOS ========================= -->
+<!-- ========================= SECCIÓN TRABAJOS ========================= 
 <section>
     <h2 id="trabajos-titulo">Trabajos realizados</h2>
     <div class="galeria">
@@ -60,15 +77,23 @@
         <img src="img/obra2.jpg" alt="Trabajo de albañilería en vivienda">
     </div>
 </section>
-
+-->
 <!-- ========================= SECCIÓN CONTACTO ========================= -->
 <section id="contacto">
     <h2 id="contacto-titulo">Contacto</h2>
-    <p id="telefono-text"><strong>Teléfono:</strong> 622 62 98 80</p>
-    <p id="zona-text"><strong>Zona de trabajo:</strong> Barcelona, Vallès Oriental y Vallès Occidental </p>
-    <img src="img/mapa.jpg" width="20%" alt="">
-    <a href="tel:622629880" class="btn" id="solicitar-btn">📞 Solicitar presupuesto</a>
+    <div class="contacto-contenido">
+        <div class="contacto-texto">
+            <h3 id="telefono-text"></h3>
+            <p>622 62 98 80</p> 
+            <h3 id="zona-text"></h3>
+            <p id="zona-texto"></p>
+            <br>
+            <a href="tel:622629880" class="btn" id="solicitar-btn">📞 Solicitar presupuesto</a>
+        </div>
+        <img class="mapa" src="img/mapa.jpg"  alt="">
+    </div>
 </section>
+
 
 <!-- ========================= FORMULARIO ========================= -->
 <section>
@@ -153,45 +178,104 @@ if (menuToggle && nav) {
   /* ===== ANIMACIÓN LOGO ===== */
   animarLogo();
 }
-</script>
-
-<script>
 
 /* ===== TEXTOS POR IDIOMA ===== */
 const textos = {
-    es: { "logo-text":"Construc,alda", "llamar-btn":"📞 Llamar ahora 622 62 98 80","whatsapp-text":"Envíanos un WhatsApp",
-          "nav-inicio":"Inicio","nav-quienes":"Quiénes somos","nav-servicios":"Qué hacemos","nav-proyectos":"Proyectos","nav-contacto":"Contacto",
-          "servicios-titulo":"Nuestros Servicios","idiomaEspanol":"Español","idiomaCatalan":"Catalán","idiomaIngles":"Inglés",
-          "servicio-cocinas":"Cocinas","servicio-banos":"Baños","servicio-reformas":"Reformas","servicio-fachadas":"Fachadas",
-          "por-que-titulo":"Por qué elegir Construc,ALDA","razon1":"✔ Empresa local en Cerdanyola del Vallès","razon2":"✔ Presupuesto sin compromiso",
-          "razon3":"✔ Seriedad y acabados de calidad","razon4":"✔ Atención personalizada","trabajos-titulo":"Trabajos realizados",
-          "contacto-titulo":"Contacto","telefono-text":"Teléfono: 622 62 98 80","zona-text":"Zona de trabajo: Barcelona, Vallès Oriental y Vallès Occidental",
-          "solicitar-btn":"📞 Solicitar presupuesto","form-titulo":"PONTE EN CONTACTO CON NOSOTROS",
-          "form-text":"¡Hablemos de tu proyecto! Rellena el formulario y uno de nuestros asesores te contactará cuanto antes. Da el primer paso para hacer realidad la reforma de tus sueños. Confía en nuestra experiencia: encontraremos la solución perfecta para tu hogar.",
-          "label-name":"Nombre:","label-email":"Email:","label-telefono":"Teléfono:","label-message":"Mensaje:","form-btn":"Enviar",
-          "footer-text":"© 2026 Alda · Albañilería en Cerdanyola del Vallès"},
-    en: { "logo-text":"ALDA Constructions", "llamar-btn":"📞 Call now 622 62 98 80","whatsapp-text":"Send us a WhatsApp",
-          "nav-inicio":"Start","nav-quienes":"About us","nav-servicios":"Services","nav-proyectos":"Projects","nav-contacto":"Contact",
-          "servicios-titulo":"Our Services","idiomaEspanol":"Spanish","idiomaCatalan":"Catalan","idiomaIngles":"English",
-          "servicio-cocinas":"Kitchens","servicio-banos":"Bathrooms","servicio-reformas":"Renovations","servicio-fachadas":"Facades",
-          "por-que-titulo":"Why choose Aldaba","razon1":"✔ Local company in Cerdanyola del Vallès","razon2":"✔ Free quote",
-          "razon3":"✔ Reliability and quality finishes","razon4":"✔ Personalized attention","trabajos-titulo":"Completed projects",
-          "contacto-titulo":"Contact","telefono-text":"Phone: 622 62 98 80","zona-text":"Working area: Cerdanyola del Vallès and surroundings",
-          "solicitar-btn":"📞 Request a quote","form-titulo":"GET IN TOUCH WITH US",
-          "form-text":"Let's talk about your project! Fill out the form and one of our advisors will contact you as soon as possible. Take the first step to make your dream renovation come true. Trust our experience: we will find the perfect solution for your home.",
-          "label-name":"Name:","label-email":"Email:","label-telefono":"Phone:","label-message":"Message:","form-btn":"Send",
-          "footer-text":"© 2026 Alda · Construction in Cerdanyola del Vallès"},
-    cat: { "logo-text":"Construccions ALDA", "llamar-btn":"📞 Truca ara 622 62 98 80","whatsapp-text":"Envia’ns un WhatsApp",
-          "nav-inicio":"Inici","nav-quienes":"Qui som","nav-servicios":"Què fem","nav-proyectos":"Projectes","nav-contacto":"Contacte",
-          "servicios-titulo":"Els nostres serveis","idiomaEspanol":"Espanyol","idiomaCatalan":"Català","idiomaIngles":"Anglès",
-          "servicio-cocinas":"Cuines","servicio-banos":"Banys","servicio-reformas":"Reformes","servicio-fachadas":"Façanes",
-          "por-que-titulo":"Per què triar Aldaba","razon1":"✔ Empresa local a Cerdanyola del Vallès","razon2":"✔ Pressupost sense compromís",
-          "razon3":"✔ Serietat i acabats de qualitat","razon4":"✔ Atenció personalitzada","trabajos-titulo":"Treballs realitzats",
-          "contacto-titulo":"Contacte","telefono-text":"Telèfon: 622 62 98 80","zona-text":"Zona de treball: Cerdanyola del Vallès i voltants",
-          "solicitar-btn":"📞 Sol·licitar pressupost","form-titulo":"POSA’T EN CONTACTE AMB NOSALTRES",
-          "form-text":"Parlem del teu projecte! Omple el formulari i un dels nostres assessors et contactarà com més aviat millor. Fes el primer pas per fer realitat la reforma dels teus somnis. Confia en la nostra experiència: trobarem la solució perfecta per a la teva llar.",
-          "label-name":"Nom:","label-email":"Email:","label-telefono":"Telèfon:","label-message":"Missatge:","form-btn":"Enviar",
-          "footer-text":"© 2026 Alda · Albañileria a Cerdanyola del Vallès"}
+    es: { "logo-text":"Construc,alda", 
+        "llamar-btn":"📞 Llamar ahora 622 62 98 80",
+        "whatsapp-text":"Envíanos un WhatsApp",
+        "nav-inicio":"Inicio",
+        "nav-quienes":"Quiénes somos",
+        "nav-servicios":"Qué hacemos ▼",
+        "nav-proyectos":"Proyectos",
+        "nav-contacto":"Contacto",
+        "nav-idioma":"Idioma ▼",
+        "servicios-titulo":"Nuestros Servicios",
+        "idiomaEspanol":"Español",
+        "idiomaCatalan":"Catalán",
+        "idiomaIngles":"Inglés",
+        "servicio-cocinas":"Cocinas",
+        "servicio-banos":"Baños",
+        "servicio-reformas":"Reformas Generales",
+        "servicio-fachadas":"Fachadas",
+        "servicio-comunidades":"Comunidades",
+        "servicio-locales":"Locales para alquilar",
+        "servicio-alquilar":"Reformas para alquilar",
+        "por-que-titulo":"Por qué elegir Construc,ALDA",
+        "razon1":"✔ Empresa local en Cerdanyola del Vallès",
+        "razon2":"✔ Presupuesto sin compromiso",
+        "razon3":"✔ Seriedad y acabados de calidad",
+        "razon4":"✔ Atención personalizada","trabajos-titulo":"Trabajos realizados",
+        "contacto-titulo":"Contacto",
+        "telefono-text":"Teléfono:",
+        "zona-text":"Zona de trabajo:",
+        "zona-texto":"Barcelona, Vallès Oriental y Vallès Occidental",
+        "solicitar-btn":"📞 Solicitar presupuesto","form-titulo":"PONTE EN CONTACTO CON NOSOTROS",
+        "form-text":"¡Hablemos de tu proyecto! Rellena el formulario y uno de nuestros asesores te contactará cuanto antes. Da el primer paso para hacer realidad la reforma de tus sueños. Confía en nuestra experiencia: encontraremos la solución perfecta para tu hogar.",
+        "label-name":"Nombre:","label-email":"Email:","label-telefono":"Teléfono:","label-message":"Mensaje:","form-btn":"Enviar",
+        "footer-text":"© 2026 Alda · Albañilería en Cerdanyola del Vallès"},
+    en: { "logo-text":"Construc,ALDA", "llamar-btn":"📞 Call now 622 62 98 80","whatsapp-text":"Send us a WhatsApp",
+        "nav-inicio":"Start",
+        "nav-quienes":"About us",
+        "nav-servicios":"Services ▼",
+        "nav-proyectos":"Projects",
+        "nav-contacto":"Contact",
+        "nav-idioma":"Language ▼",      
+        "servicios-titulo":"Our Services",
+        "idiomaEspanol":"Spanish",
+        "idiomaCatalan":"Catalan",
+        "idiomaIngles":"English",
+        "servicio-cocinas":"Kitchens",
+        "servicio-banos":"Bathrooms",
+        "servicio-reformas":"Renovations",
+        "servicio-fachadas":"Facades",
+        "servicio-comunidades":"Communities",
+        "servicio-locales":"Premises",
+        "servicio-oficinas":"Office renovation",
+        "servicio-alquilar":"Rental reform",
+        "por-que-titulo":"Why choose Aldaba",
+        "razon1":"✔ Local company in Cerdanyola del Vallès",
+        "razon2":"✔ Free quote",
+        "razon3":"✔ Reliability and quality finishes",
+        "razon4":"✔ Personalized attention",
+        "trabajos-titulo":"Completed projects",
+        "contacto-titulo":"Contact","telefono-text":"Phone: ",
+        "zona-text":"Working area: ",
+        "zona-texto":"Cerdanyola del Vallès and surroundings",
+        "solicitar-btn":"📞 Request a quote","form-titulo":"GET IN TOUCH WITH US",
+        "form-text":"Let's talk about your project! Fill out the form and one of our advisors will contact you as soon as possible. Take the first step to make your dream renovation come true. Trust our experience: we will find the perfect solution for your home.",
+        "label-name":"Name:","label-email":"Email:","label-telefono":"Phone:","label-message":"Message:","form-btn":"Send",
+        "footer-text":"© 2026 Alda · Construction in Cerdanyola del Vallès"},
+    cat: { "logo-text":"Construc,ALDA", 
+        "llamar-btn":"📞 Truca ara 622 62 98 80",
+        "whatsapp-text":"Envia’ns un WhatsApp",
+        "nav-inicio":"Inici",
+        "nav-quienes":"Qui som",
+        "nav-servicios":"Què fem ▼",
+        "nav-proyectos":"Projectes",
+        "nav-contacto":"Contacte",
+        "nav-idioma":"Idioma ▼",
+        "servicios-titulo":"Els nostres serveis","idiomaEspanol":"Espanyol","idiomaCatalan":"Català","idiomaIngles":"Anglès",
+        "servicio-cocinas":"Cuines",
+        "servicio-banos":"Banys",
+        "servicio-reformas":"Reformes",
+        "servicio-fachadas":"Façanes",
+        "servicio-locales":"Locals",
+        "servicio-comunidades":"Comunitats",
+        "servicio-oficinas":"Reforma oficines",
+        "servicio-alquilar":"Reforma lloguer",
+        "por-que-titulo":"Per què triar Aldaba",
+        "razon1":"✔ Empresa local a Cerdanyola del Vallès","razon2":"✔ Pressupost sense compromís",
+        "razon3":"✔ Serietat i acabats de qualitat",
+        "razon4":"✔ Atenció personalitzada","trabajos-titulo":"Treballs realitzats",
+        "contacto-titulo":"Contacte",
+        "telefono-text":"Telèfon:",
+        "zona-text":"Zona de treball: ",
+        "zona-texto":"Cerdanyola del Vallès i voltants",
+        "solicitar-btn":"📞 Sol·licitar pressupost","form-titulo":"POSA’T EN CONTACTE AMB NOSALTRES",
+        "form-text":"Parlem del teu projecte! Omple el formulari i un dels nostres assessors et contactarà com més aviat millor. Fes el primer pas per fer realitat la reforma dels teus somnis. Confia en la nostra experiència: trobarem la solució perfecta per a la teva llar.",
+        "label-name":"Nom:","label-email":"Email:","label-telefono":"Telèfon:","label-message":"Missatge:","form-btn":"Enviar",
+        "footer-text":"© 2026 Alda · Albañileria a Cerdanyola del Vallès"}
 };
 
 /* ===== FUNCIONES IDIOMA ===== */

@@ -93,22 +93,12 @@ header h1{
   }
 }
 
-
-
-
-
-
-
-
-
-
 /* Header reducido al hacer scroll */
 header.scrolled {
   height: 60px;
   padding: 0 20px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
-
 
 /* =========================================================
    CONTENIDO IZQUIERDO DEL HEADER
@@ -152,6 +142,7 @@ header .iconos:hover {
   text-decoration: none;
   border-radius: 6px;
   transition: 0.3s, padding 0.4s, font-size 0.4s;
+  border: #000 1px solid;
 }
 
 .btn:hover {
@@ -285,7 +276,6 @@ header .iconos:hover {
   
 }
 
-
 #logo-text span {
   opacity: 0;
   color: white;
@@ -298,7 +288,7 @@ header .iconos:hover {
 #painter {
   position: absolute;
   left: -60px;
-  bottom: -40px;
+  bottom: -10px;
   width: 60px;
   z-index: 10;
   opacity: 1;
@@ -339,7 +329,6 @@ header .iconos:hover {
     height: auto;
     border-radius: 2px;
 }
-
 
 
 /* =========================================================
@@ -456,7 +445,7 @@ footer {
   .menu-toggle {
     position: fixed;
     top: 130px;
-    right: 20px;
+    right: 60px;
     z-index: 1001;
     background: rgba(0,0,0,0.6);
     padding: 10px;
@@ -506,7 +495,6 @@ footer {
       display: block;
   }
   
-
   .dropdown-content a {
     display: block;
     padding: 8px 12px;
@@ -530,9 +518,11 @@ footer {
   }
 
   #painter {
+    top: 10px;
     bottom: 65px;
     width: 45px;
   }
+
 }
 
 @media (max-width: 480px) {
@@ -617,6 +607,11 @@ footer {
   object-fit: contain;
   flex-shrink: 0;          /* que no se reduzca el icono */
 }
+.hormigonera{
+  width: 100px;
+  height: auto;
+  margin-top: 30px;
+}
 
 /* Texto */
 .whatsapp-float .whatsapp-text {
@@ -645,6 +640,12 @@ footer {
     box-shadow: none;     /* quitar sombra */
     background: none;     /* quitar fondo blanco */
   }
+  .hormigonera{
+    width: 70px;
+    display: flex;            /* Pone el contenido en fila */
+    align-items: flex-start;  /* Alinea al inicio verticalmente */
+
+  } 
 
   .whatsapp-float img {
     width: 55px;
@@ -654,6 +655,7 @@ footer {
   .whatsapp-float .whatsapp-text {
     display: none;        /* solo el icono */
   }
+
 }
 
 /* =========================================================
@@ -683,3 +685,42 @@ footer {
 }
 
 
+/* =========================================================
+   SECCION CONTACTO
+   ========================================================= */
+
+.contacto-contenido {
+    display: flex;            /* Pone el contenido en fila */
+    align-items: flex-start;  /* Alinea al inicio verticalmente */
+    gap: 20px;                /* Espacio entre texto y mapa */
+}
+
+.contacto-texto {
+    flex: 1;                  /* Hace que el texto ocupe el espacio disponible */
+}
+
+.contacto img {
+    width: 350px;         /* Ajusta el tamaño del mapa */
+    height: auto;
+}
+.mapa{
+  width: 500px;
+
+}
+/* Media query para móviles */
+@media (max-width: 768px) {
+    .contacto-contenido {
+        flex-direction: column; /* texto arriba, mapa abajo */
+        align-items: center;    /* centra el contenido */
+        gap: 15px;
+    }
+
+    .mapa {
+        max-width: 80%; /* ocupa todo el ancho posible */
+        margin: 0 auto;
+    }
+
+    .contacto-texto {
+        text-align: center; /* opcional, para que el texto se vea mejor centrado */
+    }
+}
