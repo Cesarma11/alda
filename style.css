@@ -445,7 +445,7 @@ footer {
   .menu-toggle {
     position: fixed;
     top: 130px;
-    right: 60px;
+    right: 10px;
     z-index: 1001;
     background: rgba(0,0,0,0.6);
     padding: 10px;
@@ -723,4 +723,5 @@ footer {
     .contacto-texto {
         text-align: center; /* opcional, para que el texto se vea mejor centrado */
     }
+
 }
