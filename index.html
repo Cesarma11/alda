@@ -25,7 +25,7 @@
     <div class="servicios-grid">
         <a href="cocinas.html" class="servicio-card">
             <img src="img/cocinas/cocina1.jpg" alt="Cocinas">
-            <h3 id="servicio-cocinas">Cocinas</h3>
+            <h3 id="servicio-cocinas"></h3>
         </a>
         <a href="banos.html" class="servicio-card">
             <img src="img/baños/aseo1.jpg" alt="Baños">
@@ -51,7 +51,7 @@
             <img src="img/oficina.jpg" alt="Fachadas">
             <h3 id="servicio-oficinas"></h3>
         </a>
-        <a href="construccion.html" class="servicio-card">
+        <a href="alquiler.html" class="servicio-card">
             <img src="img/alquiler.jpg" alt="Alquilar">
             <h3 id="servicio-alquilar"></h3>
         </a>
@@ -128,60 +128,60 @@
 <!-- ========================= JAVASCRIPT ========================= -->
 
 <script>
-fetch("header.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("header").innerHTML = html;
-    inicializarHeader();
-  });
-
-function inicializarHeader() {
-
-  /* ===== MENU HAMBURGUESA ===== */
-  const menuToggle = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".header-nav");
-
-if (menuToggle && nav) {
-  menuToggle.addEventListener("click", e => {
-    e.stopPropagation();
-    menuToggle.classList.toggle("active");
-    nav.classList.toggle("active");
-  });
-
-  nav.addEventListener("click", e => e.stopPropagation()); // evita que clics dentro del nav cierren el menú
-  document.addEventListener("click", () => {
-    menuToggle.classList.remove("active");
-    nav.classList.remove("active");
-  });
-  
-  const dropdown = document.querySelector(".dropdown");
-  if (dropdown) {
-    dropdown.addEventListener("click", e => e.stopPropagation()); // evita que clic en idiomas cierre el menú
-  }
-}
-
-
-  /* ===== EVENTOS IDIOMAS ===== */
-  document.querySelectorAll(".dropdown-content a[data-lang]").forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      cambiarIdioma(link.dataset.lang);
-      animarLogo(); // ✅ si quieres que se repita al cambiar idioma
+    fetch("header.html")
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById("header").innerHTML = html;
+        inicializarHeader();
     });
-  });
 
-  /* ===== IDIOMA INICIAL ===== */
-  const idiomaGuardado = localStorage.getItem("idioma") || "es";
-  cambiarIdioma(idiomaGuardado);
-  resaltarIdioma(idiomaGuardado);
+    function inicializarHeader() {
 
-  /* ===== ANIMACIÓN LOGO ===== */
-  animarLogo();
-}
+    /* ===== MENU HAMBURGUESA ===== */
+    const menuToggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".header-nav");
+
+    if (menuToggle && nav) {
+    menuToggle.addEventListener("click", e => {
+        e.stopPropagation();
+        menuToggle.classList.toggle("active");
+        nav.classList.toggle("active");
+    });
+
+    nav.addEventListener("click", e => e.stopPropagation()); // evita que clics dentro del nav cierren el menú
+    document.addEventListener("click", () => {
+        menuToggle.classList.remove("active");
+        nav.classList.remove("active");
+    });
+    
+    const dropdown = document.querySelector(".dropdown");
+    if (dropdown) {
+        dropdown.addEventListener("click", e => e.stopPropagation()); // evita que clic en idiomas cierre el menú
+    }
+    }
+
+    /* ===== EVENTOS IDIOMAS ===== */
+    document.querySelectorAll(".dropdown-content a[data-lang]").forEach(link => {
+        link.addEventListener("click", e => {
+        e.preventDefault();
+        cambiarIdioma(link.dataset.lang);
+        animarLogo(); // ✅ si quieres que se repita al cambiar idioma
+        });
+    });
+
+    /* ===== IDIOMA INICIAL ===== */
+    const idiomaGuardado = localStorage.getItem("idioma") || "es";
+    cambiarIdioma(idiomaGuardado);
+    resaltarIdioma(idiomaGuardado);
+
+    /* ===== ANIMACIÓN LOGO ===== */
+    animarLogo();
+    }
 
 /* ===== TEXTOS POR IDIOMA ===== */
 const textos = {
-    es: { "logo-text":"Construc,alda", 
+    es: { 
+        "logo-text":"Construc,alda", 
         "llamar-btn":"📞 Llamar ahora 622 62 98 80",
         "whatsapp-text":"Envíanos un WhatsApp",
         "nav-inicio":"Inicio",
@@ -195,27 +195,38 @@ const textos = {
         "idiomaCatalan":"Catalán",
         "idiomaIngles":"Inglés",
         "servicio-cocinas":"Cocinas",
+        "servicio-cocinas2":"Cocinas",
         "servicio-banos":"Baños",
+        "servicio-banos2":"Baños",
         "servicio-reformas":"Reformas Generales",
+        "servicio-reformas2":"Reformas Generales",
         "servicio-fachadas":"Fachadas",
+        "servicio-fachadas2":"Fachadas",
         "servicio-comunidades":"Comunidades",
+        "servicio-comunidades2":"Comunidades",
         "servicio-locales":"Locales",
+        "servicio-locales2":"Locales",
         "servicio-oficinas":"Oficinas",
+        "servicio-oficinas2":"Oficinas",
         "servicio-alquilar":"Reformas para alquilar",
+        "servicio-alquilar2":"Reformas para alquilar",
         "por-que-titulo":"Por qué elegir Construc,ALDA",
-        "razon1":"✔ Empresa local en Cerdanyola del Vallès",
+        "razon1":"✔ Empresa local en Sardañola del Vallés",
         "razon2":"✔ Presupuesto sin compromiso",
         "razon3":"✔ Seriedad y acabados de calidad",
         "razon4":"✔ Atención personalizada","trabajos-titulo":"Trabajos realizados",
         "contacto-titulo":"Contacto",
         "telefono-text":"Teléfono:",
         "zona-text":"Zona de trabajo:",
-        "zona-texto":"Barcelona, Vallès Oriental y Vallès Occidental",
+        "zona-texto":"Barcelona, Vallés Oriental y Vallés Occidental",
         "solicitar-btn":"📞 Solicitar presupuesto","form-titulo":"PONTE EN CONTACTO CON NOSOTROS",
         "form-text":"¡Hablemos de tu proyecto! Rellena el formulario y uno de nuestros asesores te contactará cuanto antes. Da el primer paso para hacer realidad la reforma de tus sueños. Confía en nuestra experiencia: encontraremos la solución perfecta para tu hogar.",
         "label-name":"Nombre:","label-email":"Email:","label-telefono":"Teléfono:","label-message":"Mensaje:","form-btn":"Enviar",
-        "footer-text":"© 2026 Alda · Albañilería en Cerdanyola del Vallès"},
-    en: { "logo-text":"Construc,ALDA", "llamar-btn":"📞 Call now 622 62 98 80","whatsapp-text":"Send us a WhatsApp",
+        "footer-text":"© 2026 Alda · Albañilería en Sardañola del Vallés"},
+    en: { 
+        "logo-text":"Construc,ALDA", 
+        "llamar-btn":"📞 Call now 622 62 98 80",
+        "whatsapp-text":"Send us a WhatsApp",
         "nav-inicio":"Start",
         "nav-quienes":"About us",
         "nav-servicios":"Services ▼",
@@ -227,13 +238,21 @@ const textos = {
         "idiomaCatalan":"Catalan",
         "idiomaIngles":"English",
         "servicio-cocinas":"Kitchens",
+        "servicio-cocinas2":"Kitchens",
         "servicio-banos":"Bathrooms",
+        "servicio-banos2":"Bathrooms",
         "servicio-reformas":"Renovations",
+        "servicio-reformas2":"Renovations",
         "servicio-fachadas":"Facades",
+        "servicio-fachadas2":"Facades",
         "servicio-comunidades":"Communities",
+        "servicio-comunidades2":"Communities",
         "servicio-locales":"Premises",
+        "servicio-locales2":"Premises",
         "servicio-oficinas":"Office",
+        "servicio-oficinas2":"Office",
         "servicio-alquilar":"Rental reform",
+        "servicio-alquilar2":"Rental reform",
         "por-que-titulo":"Why choose Aldaba",
         "razon1":"✔ Local company in Cerdanyola del Vallès",
         "razon2":"✔ Free quote",
@@ -242,12 +261,17 @@ const textos = {
         "trabajos-titulo":"Completed projects",
         "contacto-titulo":"Contact","telefono-text":"Phone: ",
         "zona-text":"Working area: ",
-        "zona-texto":"Cerdanyola del Vallès and surroundings",
+        "zona-texto":"Barcelona, Vallès Oriental and Vallès Occidental",
         "solicitar-btn":"📞 Request a quote","form-titulo":"GET IN TOUCH WITH US",
         "form-text":"Let's talk about your project! Fill out the form and one of our advisors will contact you as soon as possible. Take the first step to make your dream renovation come true. Trust our experience: we will find the perfect solution for your home.",
-        "label-name":"Name:","label-email":"Email:","label-telefono":"Phone:","label-message":"Message:","form-btn":"Send",
+        "label-name":"Name:",
+        "label-email":"Email:",
+        "label-telefono":"Phone:",
+        "label-message":"Message:",
+        "form-btn":"Send",
         "footer-text":"© 2026 Alda · Construction in Cerdanyola del Vallès"},
-    cat: { "logo-text":"Construc,ALDA", 
+    cat: { 
+        "logo-text":"Construc,ALDA", 
         "llamar-btn":"📞 Truca ara 622 62 98 80",
         "whatsapp-text":"Envia’ns un WhatsApp",
         "nav-inicio":"Inici",
@@ -256,15 +280,26 @@ const textos = {
         "nav-proyectos":"Projectes",
         "nav-contacto":"Contacte",
         "nav-idioma":"Idioma ▼",
-        "servicios-titulo":"Els nostres serveis","idiomaEspanol":"Espanyol","idiomaCatalan":"Català","idiomaIngles":"Anglès",
+        "servicios-titulo":"Els nostres serveis",
+        "idiomaEspanol":"Espanyol",
+        "idiomaCatalan":"Català",
+        "idiomaIngles":"Anglès",
         "servicio-cocinas":"Cuines",
+        "servicio-cocinas2":"Cuines",
         "servicio-banos":"Banys",
+        "servicio-banos2":"Banys",
         "servicio-reformas":"Reformes",
+        "servicio-reformas2":"Reformes",
         "servicio-fachadas":"Façanes",
+        "servicio-fachadas2":"Façanes",
         "servicio-locales":"Locals",
+        "servicio-locales2":"Locals",
         "servicio-comunidades":"Comunitats",
+        "servicio-comunidades2":"Comunitats",
         "servicio-oficinas":"Oficines",
+        "servicio-oficinas2":"Oficines",
         "servicio-alquilar":"Reforma lloguer",
+        "servicio-alquilar2":"Reforma lloguer",
         "por-que-titulo":"Per què triar Aldaba",
         "razon1":"✔ Empresa local a Cerdanyola del Vallès","razon2":"✔ Pressupost sense compromís",
         "razon3":"✔ Serietat i acabats de qualitat",
@@ -272,7 +307,7 @@ const textos = {
         "contacto-titulo":"Contacte",
         "telefono-text":"Telèfon:",
         "zona-text":"Zona de treball: ",
-        "zona-texto":"Cerdanyola del Vallès i voltants",
+        "zona-texto":"Barcelona, Vallès Oriental, Vallès Occidental",
         "solicitar-btn":"📞 Sol·licitar pressupost","form-titulo":"POSA’T EN CONTACTE AMB NOSALTRES",
         "form-text":"Parlem del teu projecte! Omple el formulari i un dels nostres assessors et contactarà com més aviat millor. Fes el primer pas per fer realitat la reforma dels teus somnis. Confia en la nostra experiència: trobarem la solució perfecta per a la teva llar.",
         "label-name":"Nom:","label-email":"Email:","label-telefono":"Telèfon:","label-message":"Missatge:","form-btn":"Enviar",
@@ -366,6 +401,15 @@ function animarLogo() {
 }
 
 </script>
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

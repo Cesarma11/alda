@@ -11,78 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <header id="main-header">
-        <div class="header-content" style="position: relative;">
-            <a href="index.html" style="text-decoration:none"><h1 id="logo-text">Construcciones&nbsp;&nbsp;ALDA</h1></a>
-            <img id="painter" src="img/pintor2.gif" alt="Pintor animado">
-            <div class="iconos">🧱 🔨 🏗️</div>
-            <a href="tel:622629880" class="btn" id="llamar-btn">📞 Llamar ahora 622 62 98 80</a>
-        </div>
 
-        <button class="menu-toggle" aria-label="Abrir menú">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <a href="https://wa.me/622629880?text=Hola,%20quiero%20información%20sobre%20mi%20proyecto" 
-            target="_blank" class="whatsapp-float" style="text-decoration: none;">
-            <img src="./img/whatsApp.png" alt="WhatsApp">
-            <span class="whatsapp-text" id="whatsapp-text">Envíanos un WhatsApp</span>
-        </a>
-
-        <nav class="header-nav">
-            <a href="index.html" id="nav-inicio">Inicio</a>
-            <a href="quienSomos.html" id="nav-quienes">Quiénes somos</a>
-            <div class="dropdown">
-                <a href="#" class="dropbtn" id="nav-servicios">
-                    <i class="fa-solid fa-hammer"></i> Qué hacemos ▼
-                </a>
-                <div class="dropdown-content">
-                    <a href="reformas.html" >
-                        <i class="fa-solid fa-kitchen-set"></i> 
-                        <span class="nav-text"id="nav-queCocinas"></span>
-                    </a>
-                    <a href="fachadas.html" >
-                        <i class="fa-solid fa-bath"></i>
-                        <span class="nav-text"id="nav-queBanos"></span>
-                    </a>
-                    <a href="reformas.html" >
-                        <i class="fa-solid fa-screwdriver-wrench"></i> 
-                        <span class="nav-text"id="nav-queReformas"></span>
-                    </a>
-                    <a href="fachadas.html" >
-                        <i class="fa-solid fa-building"></i>
-                        <span class="nav-text"id="nav-queFachadas"></span>
-                    </a>
-
-                </div>
-            </div>
-
-
-            <a href="#proyectos" id="nav-proyectos">Proyectos</a>
-            <a href="#contacto" id="nav-contacto">Contacto</a>
-
-            <!-- Menú desplegable de idiomas -->
-            <!-- Menú desplegable de idiomas -->
-            <div class="dropdown">
-                <a href="#" class="dropbtn">Idioma ▼</a>
-                <div class="dropdown-content">
-                    <a href="#" onclick="cambiarIdioma('es'); return false;">
-                        <img src="img/espanol.png" alt="Español"> <span class="nav-text" id="idiomaEspanol"></span>
-                    </a>
-                    <a href="#" onclick="cambiarIdioma('cat'); return false;">
-                        <img src="img/catalan.png" alt="Català"> <span class="nav-text" id="idiomaCatalan"></span>
-                    </a>            
-                    <a href="#" onclick="cambiarIdioma('en'); return false;">
-                        <img src="img/ingles.png" alt="English"> <span class="nav-text" id="idiomaIngles"></span>
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-    </header>
-
+<div id="header"></div>
     <section>
         <h2 id="por-que-titulo"></h2>
         <p style="text-align: justify;  white-space: pre-line; " id="parrafo" ></p>
@@ -119,106 +49,167 @@
     <p id="footer-text">© 2026 Alda · Albañilería en Cerdanyola del Vallès</p>
     </footer>
 
-    <!------------------------------------- ZONA DE JAVASCRIPT------------------------------------------->
+<!-- ========================= JAVASCRIPT ========================= -->
 
-    <script>
-    /* ==========================
-    1️⃣ REDUCIR EL HEADER EN SCROLL
-    ========================== */
-    let lastScroll = 0;
-    window.addEventListener("scroll", () => {
-        if (window.innerWidth > 768) return; // solo móvil
-        const currentScroll = window.pageYOffset;
-        const header = document.querySelector("header");
-        if (currentScroll > lastScroll && currentScroll > 80) {
-            header.classList.add("hide");
-        } else {
-            header.classList.remove("hide");
-        }
-        lastScroll = currentScroll;
+<script>
+    fetch("header.html")
+    .then(res => res.text())
+    .then(html => {
+        document.getElementById("header").innerHTML = html;
+        inicializarHeader();
     });
 
-    /* ==========================
-    2️⃣ MENU HAMBURGUESA
-    ========================== */
+    function inicializarHeader() {
+
+    /* ===== MENU HAMBURGUESA ===== */
     const menuToggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector(".header-nav");
-    menuToggle.addEventListener("click", (e) => {
+
+    if (menuToggle && nav) {
+    menuToggle.addEventListener("click", e => {
         e.stopPropagation();
         menuToggle.classList.toggle("active");
         nav.classList.toggle("active");
     });
-    nav.addEventListener("click", (e) => e.stopPropagation());
+
+    nav.addEventListener("click", e => e.stopPropagation()); // evita que clics dentro del nav cierren el menú
     document.addEventListener("click", () => {
         menuToggle.classList.remove("active");
         nav.classList.remove("active");
     });
+    
+    const dropdown = document.querySelector(".dropdown");
+    if (dropdown) {
+        dropdown.addEventListener("click", e => e.stopPropagation()); // evita que clic en idiomas cierre el menú
+    }
+    }
 
-    /* ==========================
-    3️⃣ TEXTOS POR IDIOMA
-    ========================== */
-    const textos = {
-        es: {
-            "logo-text":"Construc,ALDA",
+    /* ===== EVENTOS IDIOMAS ===== */
+    document.querySelectorAll(".dropdown-content a[data-lang]").forEach(link => {
+        link.addEventListener("click", e => {
+        e.preventDefault();
+        cambiarIdioma(link.dataset.lang);
+        animarLogo(); // ✅ si quieres que se repita al cambiar idioma
+        });
+    });
+
+    /* ===== IDIOMA INICIAL ===== */
+    const idiomaGuardado = localStorage.getItem("idioma") || "es";
+    cambiarIdioma(idiomaGuardado);
+    resaltarIdioma(idiomaGuardado);
+
+    /* ===== ANIMACIÓN LOGO ===== */
+    animarLogo();
+    }
+
+/* ===== TEXTOS POR IDIOMA ===== */
+const textos = {
+    es: { 
+            "logo-text":"Construc,alda", 
             "llamar-btn":"📞 Llamar ahora 622 62 98 80",
             "whatsapp-text":"Envíanos un WhatsApp",
-            "nav-inicio":"inicio",
+            "nav-inicio":"Inicio",
             "nav-quienes":"Quiénes somos",
-            "nav-servicios":"Qué hacemos",
+            "nav-servicios":"Qué hacemos ▼",
             "nav-proyectos":"Proyectos",
             "nav-contacto":"Contacto",
+            "nav-idioma":"Idioma ▼",
             "idiomaEspanol":"Español",
             "idiomaCatalan":"Catalán",
-            "idiomaIngles":"Ingles",
-
-            "nav-queCocinas":"Cocinas",
-            "nav-queBanos":"Baños", 
-            "nav-queFachadas":"Fachadas",
-            "nav-queReformas":"Reformas", 
-
-            "por-que-titulo":"REFORMAS",
-            "por-que-titulo2":"Descubre nuestros proyectos de reforma de baños",
+            "idiomaIngles":"Inglés",      
+            "servicio-cocinas":"Cocinas",
+            "servicio-cocinas2":"Cocinas",
+            "servicio-banos":"Baños",
+            "servicio-banos2":"Baños",
+            "servicio-reformas":"Reformas Generales",
+            "servicio-reformas2":"Reformas Generales",
+            "servicio-fachadas":"Fachadas",
+            "servicio-fachadas2":"Fachadas",
+            "servicio-comunidades":"Comunidades",
+            "servicio-comunidades2":"Comunidades",
+            "servicio-locales":"Locales",
+            "servicio-locales2":"Locales",
+            "servicio-oficinas":"Oficinas",
+            "servicio-oficinas2":"Oficinas",
+            "servicio-alquilar":"Reformas para alquilar",
+            "servicio-alquilar2":"Reformas para alquilar",
+            "por-que-titulo":"REFORMAS GENERALES",
+            "por-que-titulo2":"Proyectos de reformas finalizados: descubre nuestros trabajos realizados",
             "parrafoNegrita":"Reformas integrales diseñadas para ti, con acabados de alta calidad y una excelente relación calidad-precio.",
-            "parrafo":"En Construcciones ALDA llevamos a cabo reformas integrales en Barcelona pensadas para encajar contigo y con tu forma de vivir. Nos ocupamos de todo el proceso, cuidando cada detalle para lograr acabados de alta calidad y espacios que reflejen tu personalidad.\n\n Contamos con un equipo profesional que trabaja siempre con un objetivo claro: ofrecer el mejor equilibrio entre calidad y precio. Desde la planificación inicial hasta la entrega final, supervisamos cada etapa para asegurar un resultado a la altura de lo que esperas. Confiar en Construc,ALDA es apostar por una reforma sin complicaciones. Transformamos viviendas en Barcelona combinando diseño, funcionalidad y materiales de primera, garantizando siempre una excelente relación calidad-precio.",
-            "parrafo2":"Descubre nuestra selección de reformas de baños y déjate inspirar por espacios renovados donde el diseño, la practicidad y la calidad van de la mano. En Construcciones ALDA, desarrollamos proyectos a medida, pensados para encajar perfectamente con el estilo y las necesidades de cada cliente, cuidando cada detalle del resultado final. Nuestra galería muestra el nivel de dedicación y profesionalidad que aplicamos en cada trabajo, con baños actuales, sofisticados y funcionales. Utilizamos materiales de primera calidad y soluciones innovadoras para lograr acabados duraderos y estéticamente impecables.",
-            "parrafo3":"Renovar el baño es una inversión que mejora el confort y la funcionalidad del hogar. Diseñamos espacios modernos y prácticos, adaptados al estilo y a las necesidades de cada cliente. Acompañamos y asesoramos durante todo el proceso, ayudando en la elección de materiales, sanitarios y soluciones de ducha, para que cada cliente pueda tomar la decisión que mejor se ajuste a sus gustos y presupuesto. Nuestro equipo se encarga de la ejecución completa de la reforma, cuidando cada detalle para conseguir un baño atractivo, eficiente y fácil de mantener, con acabados de alta calidad.",
-            "razon1":"✔ Empresa local en Cerdanyola del Vallès",
+            "parrafo":"En Construc,ALDA  llevamos a cabo reformas integrales en Barcelona pensadas para encajar contigo y con tu forma de vivir. Nos ocupamos de todo el proceso, cuidando cada detalle para lograr acabados de alta calidad y espacios que reflejen tu personalidad.\n\n Contamos con un equipo profesional que trabaja siempre con un objetivo claro: ofrecer el mejor equilibrio entre calidad y precio. Desde la planificación inicial hasta la entrega final, supervisamos cada etapa para asegurar un resultado a la altura de lo que esperas. Confiar en Construc,ALDA es apostar por una reforma sin complicaciones. Transformamos viviendas en Barcelona combinando diseño, funcionalidad y materiales de primera, garantizando siempre una excelente relación calidad-precio.",
+            "parrafo2":`Descubre nuestra galería de proyectos y comprueba cómo en Construc,ALDA damos nueva vida a viviendas y locales
+                comerciales mediante reformas a medida y acabados de alta calidad. Cada trabajo es una muestra de nuestra trayectoria, 
+                el cuidado por los detalles y el compromiso constante con resultados excelentes.En la galería podrás ver ejemplos de 
+                reformas integrales de viviendas, actualizaciones de cocinas y baños, propuestas de interiorismo contemporáneo y 
+                redistribuciones pensadas para mejorar el confort y la funcionalidad. Adaptamos cada proyecto al estilo y a las
+                necesidades de nuestros clientes, logrando espacios que combinan diseño, eficiencia y practicidad.`,
+            "parrafo3":`En Construc,ALDA somos especialistas en reformas integrales en Barcelona, ofreciendo soluciones totalmente 
+                adaptadas a cada cliente. Gestionamos cada proyecto con planificación, precisión y especial cuidado en los detalles, 
+                logrando resultados que se ajustan a tu estilo y necesidades. Contamos con un equipo profesional que garantiza una 
+                excelente relación calidad-precio en cada intervención. Desde la fase de diseño y asesoramiento hasta la ejecución final, 
+                supervisamos cada etapa para asegurar un acabado impecable y superar tus expectativas. Con Construc, ALDA, renovar tu 
+                vivienda en Barcelona es un proceso ágil y bien organizado. Realizamos reformas integrales que combinan funcionalidad, 
+                diseño y materiales de calidad, siempre buscando el mejor equilibrio entre estética y presupuesto.`,
+            "razon1":"✔ Empresa local en Sardañola del Vallés",
             "razon2":"✔ Presupuesto sin compromiso",
             "razon3":"✔ Seriedad y acabados de calidad",
             "razon4":"✔ Atención personalizada",
             "trabajos-titulo":"Trabajos realizados",
             "contacto-titulo":"Contacto",
             "telefono-text":"Teléfono: 622 62 98 80",
-            "zona-text":"Zona de trabajo: Cerdanyola del Vallès y alrededores",
+            "zona-text":"Zona de trabajo: Barcelona, Vallés Oriental y Vallés Occidental",
             "solicitar-btn":"📞 Solicitar presupuesto",
-            "footer-text":"© 2026 Alda · Albañilería en Cerdanyola del Vallès"
+            "footer-text":"© 2026 Alda · Albañilería en Sardañola del Vallés"
         },
         en: {
-            "logo-text":"Construc,ALDA",
+            "logo-text":"Construc,ALDA", 
             "llamar-btn":"📞 Call now 622 62 98 80",
             "whatsapp-text":"Send us a WhatsApp",
-            "nav-inicio":"Star",
+            "nav-inicio":"Start",
             "nav-quienes":"About us",
-            "nav-servicios":"Services",
+            "nav-servicios":"Services ▼",
             "nav-proyectos":"Projects",
             "nav-contacto":"Contact",
+            "nav-idioma":"Language ▼",      
+            "servicios-titulo":"Our Services",
             "idiomaEspanol":"Spanish",
             "idiomaCatalan":"Catalan",
             "idiomaIngles":"English",
-
-
-            "nav-queCocinas":"kitchens",
-            "nav-queBanos":"bathrooms", 
-            "nav-queFachadas":"Facades",
-            "nav-queReformas":"Reforms",
- 
-            "por-que-titulo":"kitchens",
-            "por-que-titulo2":"Discover our kitchen renovation projects",            
+            "servicio-cocinas":"Kitchens",
+            "servicio-cocinas2":"Kitchens",
+            "servicio-banos":"Bathrooms",
+            "servicio-banos2":"Bathrooms",
+            "servicio-reformas":"Renovations",
+            "servicio-reformas2":"Renovations",
+            "servicio-fachadas":"Facades",
+            "servicio-fachadas2":"Facades",
+            "servicio-comunidades":"Communities",
+            "servicio-comunidades2":"Communities",
+            "servicio-locales":"Premises",
+            "servicio-locales2":"Premises",
+            "servicio-oficinas":"Office",
+            "servicio-oficinas2":"Office",
+            "servicio-alquilar":"Rental reform",
+            "servicio-alquilar2":"Rental reform",
+            "por-que-titulo":"GENERAL REFORMS",
+            "por-que-titulo2":"Completed renovation projects: explore our finished work",            
             "parrafoNegrita":"Complete renovations designed for you, with high-quality finishes and excellent value for money.",
             "parrafo":`At Construcciones ALDA, we carry out complete home renovations in Barcelona designed to adapt to you and your way of living. We take care of the entire process, paying close attention to every detail to achieve high-quality finishes and spaces that reflect your personality.
                 We have a professional team that always works with a clear goal: to offer the best balance between quality and price. From initial planning to final delivery, we supervise every stage to ensure results that meet your expectations. Trusting Construc,ALDA means choosing a hassle-free renovation.
                 We transform homes in Barcelona by combining design, functionality, and top-quality materials, always guaranteeing excellent value for money.`,
-            "parrafo2":"We invite you to explore some of our kitchen renovation projects, where we transform each space into a practical, modern environment with its own unique personality. If you need ideas for your kitchen renovation, our gallery will help you visualize various complete and custom-designed renovations, all executed with meticulous attention to detail. We handle the entire process: from design and layout to the selection of materials, furniture, and appliances, always ensuring a high-quality and durable finish.",
+            "parrafo2":`Explore our project gallery and see how at Construc,ALDA we transform homes and commercial spaces 
+                through tailored renovation solutions and high-quality finishes. Every project reflects our experience, 
+                attention to detail, and strong commitment to excellence. In our gallery, you will find examples of full home renovations, 
+                kitchen and bathroom upgrades, modern interior designs, and optimized layouts created to enhance comfort and functionality. 
+                We specialize in adapting each renovation to our clients’ needs and personal style, delivering results that combine 
+                aesthetics, efficiency, and practicality.`,
+            "parrafo3":`At Construc,ALDA, we specialize in full home renovations in Barcelona, providing fully customized solutions 
+                tailored to each client. We manage every project with careful planning and attention to detail, delivering results that 
+                reflect your style and specific needs. Our professional team guarantees excellent value for money in every project. 
+                From the design and planning stage to the final execution, we oversee each phase to ensure flawless results and exceed 
+                your expectations. With Construc, ALDA, transforming your home in Barcelona is a smooth and well-organized process. 
+                We deliver comprehensive renovations that combine functionality, design, and high-quality materials, always maintaining 
+                the best balance between aesthetics and budget.`,
             "razon1":"✔ Local company in Cerdanyola del Vallès",
             "razon2":"✔ Free quote",
             "razon3":"✔ Reliability and quality finishes",
@@ -226,34 +217,58 @@
             "trabajos-titulo":"Completed projects",
             "contacto-titulo":"Contact",
             "telefono-text":"Phone: 622 62 98 80",
-            "zona-text":"Working area: Cerdanyola del Vallès and surroundings",
+            "zona-text":"Working area: Barcelona, Vallés Oriental and Vallés Occidental",
             "solicitar-btn":"📞 Request a quote",
             "footer-text":"© 2026 Alda · Construction in Cerdanyola del Vallès"
         },
         cat: {
-            "logo-text":"Construc,ALDA",
+            "logo-text":"Construc,ALDA", 
             "llamar-btn":"📞 Truca ara 622 62 98 80",
             "whatsapp-text":"Envia’ns un WhatsApp",
             "nav-inicio":"Inici",
             "nav-quienes":"Qui som",
-            "nav-servicios":"Què fem",
+            "nav-servicios":"Què fem ▼",
             "nav-proyectos":"Projectes",
             "nav-contacto":"Contacte",
+            "nav-idioma":"Idioma ▼",
+            "servicios-titulo":"Els nostres serveis",
             "idiomaEspanol":"Espanyol",
             "idiomaCatalan":"Català",
             "idiomaIngles":"Anglès",
-
-            "nav-queCocinas":"Cuines",
-            "nav-queBanos":"Banys",
-            "nav-queReformas":"Reformes",
-            "nav-queFachadas":"Façanes",
-
-            "por-que-titulo":"CUINES", 
-            "por-que-titulo2":"Reformes integrals dissenyades per a tu, amb acabats d’alta qualitat i una excel·lent relació qualitat-preu.",
+            "servicio-cocinas":"Cuines",
+            "servicio-cocinas2":"Cuines",
+            "servicio-banos":"Banys",
+            "servicio-banos2":"Banys",
+            "servicio-reformas":"Reformes",
+            "servicio-reformas2":"Reformes",
+            "servicio-fachadas":"Façanes",
+            "servicio-fachadas2":"Façanes",
+            "servicio-locales":"Locals",
+            "servicio-locales2":"Locals",
+            "servicio-comunidades":"Comunitats",
+            "servicio-comunidades2":"Comunitats",
+            "servicio-oficinas":"Oficines",
+            "servicio-oficinas2":"Oficines",
+            "servicio-alquilar":"Reforma lloguer",
+            "servicio-alquilar2":"Reforma lloguer",
+            "por-que-titulo":"REFORMES GENERALS", 
+            "por-que-titulo2":"Projectes de reformes finalitzades: descobreix els nostres treballs realitzats",
             "parrafo": `A Construcciones ALDA realitzem reformes integrals a Barcelona pensades per adaptar-se a tu i a la teva manera de viure.
                 Ens ocupem de tot el procés, cuidant cada detall per aconseguir acabats d’alta qualitat i espais que reflecteixin la teva personalitat.
                 Comptem amb un equip professional que treballa sempre amb un objectiu clar: oferir el millor equilibri entre qualitat i preu. Des de la planificació inicial fins al lliurament final, supervisem cada etapa per garantir un resultat a l’alçada del que esperes. Confiar en Construc.ALDA és apostar per una reforma sense complicacions. Transformem habitatges a Barcelona combinant disseny, funcionalitat i materials de primera, garantint sempre una excel·lent relació qualitat-preu.`,
-            "parrafo2":"Et convidem a conèixer algunes de les nostres feines de reforma de cuines, on convertim cada espai en un lloc pràctic, modern i amb personalitat pròpia. Si necessites idees per renovar la teva cuina, la nostra galeria t'ajudarà a visualitzar diferents reformes integrals ia mida, fetes amb una atenció especial al detall. Ens ocupem de tot el procés: des del disseny i distribució fins a la selecció de materials, mobiliari i equipament, assegurant sempre un acabat d'alta qualitat i durador.",
+            "parrafo2":`Descobreix la nostra galeria de projectes i comprova com a Construc,ALDA transformem habitatges i 
+                espais comercials amb solucions a mida i acabats d’alta qualitat. Cada projecte reflecteix la nostra experiència, 
+                l’atenció als detalls i el compromís amb l’excel·lència en cada reforma. A la galeria hi trobaràs exemples de reformes 
+                integrals d’habitatges, renovacions de cuines i banys, dissenys d’interiors moderns i redistribucions pensades per millorar
+                 el confort i la funcionalitat. Ens especialitzem a adaptar cada projecte a les necessitats i l’estil dels nostres clients, 
+                 garantint resultats que combinen estètica, eficiència i practicitat.`,
+            "parrafo3":`A Construc,ALDA som especialistes en reformes integrals a Barcelona, oferint solucions totalment adaptades a cada 
+                client. Gestionem cada projecte amb planificació, precisió i especial atenció als detalls, aconseguint resultats que 
+                reflecteixen el teu estil i les teves necessitats. Disposem d’un equip professional que garanteix una excel·lent relació 
+                qualitat-preu en cada intervenció. Des de la fase de disseny i assessorament fins a l’execució final, supervisem cada 
+                etapa per assegurar uns acabats impecables i superar les teves expectatives. Amb Construc, ALDA, transformar el teu 
+                habitatge a Barcelona és un procés àgil i ben organitzat. Realitzem reformes integrals que combinen funcionalitat, 
+                disseny i materials de qualitat, sempre buscant el millor equilibri entre estètica i pressupost.`,
             "razon1":"✔ Empresa local a Cerdanyola del Vallès",
             "razon2":"✔ Pressupost sense compromís",
             "razon3":"✔ Serietat i acabats de qualitat",
@@ -261,204 +276,100 @@
             "trabajos-titulo":"Treballs realitzats",
             "contacto-titulo":"Contacte",
             "telefono-text":"Telèfon: 622 62 98 80",
-            "zona-text":"Zona de treball: Cerdanyola del Vallès i voltants",
+            "zona-text":"Zona de treball: Barcelona, Vallès Oriental i Vallès Occidental",
             "solicitar-btn":"📞 Sol·licitar pressupost",
             "footer-text":"© 2026 Alda · Albañileria a Cerdanyola del Vallès"
         }
     };
 
-    /* ==========================
-    4️⃣ Animación del logo con pintor
-    ========================== */
-    function animarLogo() {
-        const logo = document.getElementById("logo-text");
-        const painter = document.getElementById("painter");
-        const letters = logo.textContent.split(""); // incluye espacios
+ 
+/* ===== FUNCIONES IDIOMA ===== */
 
-        // Limpiar y crear spans
-        logo.textContent = "";
-        letters.forEach(letter => {
-            const span = document.createElement("span");
-            span.textContent = letter;
+function resaltarIdioma(idioma) {
+  const enlaces = document.querySelectorAll(".dropdown-content a[data-lang]");
+  enlaces.forEach(a => a.classList.remove("active-language"));
+  const activo = document.querySelector(`.dropdown-content a[data-lang="${idioma}"]`);
+  if (activo) activo.classList.add("active-language");
+}
 
-            // si es espacio, darle ancho fijo
-            if(letter === " ") {
-                span.style.display = "inline-block";
-                span.style.width = "0.5em"; // ajusta el espacio entre palabras
-            } else {
-                span.style.opacity = 0;
-                span.style.display = "inline-block";
-            }
+function cambiarIdioma(idioma){
+  for (let id in textos[idioma]) {
+    const elemento = document.getElementById(id);
+    if (!elemento) continue;
 
-            logo.appendChild(span);
-        });
+    elemento.textContent = textos[idioma][id];
+  }
 
-        const spans = logo.querySelectorAll("span");
-        let i = 0;
-        painter.style.opacity = 1;
-        painter.style.transition = "left 0.3s ease";
+  localStorage.setItem("idioma", idioma);
+  resaltarIdioma(idioma);
 
-    function pintarLetra() {
-        if(i >= spans.length){
-            // Desaparece al final
-            painter.style.transition = "opacity 0.5s";
-            painter.style.opacity = 0;
-            return;
-        }
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+  if(menuToggle && nav){
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+  }
+}
+/* animar Logo*/
+function animarLogo() {
+  const logo = document.getElementById("logo-text");
+  const painter = document.getElementById("painter");
+  if (!logo || !painter) return;
 
-        const span = spans[i];
-        const spanRect = span.getBoundingClientRect();
-        const headerRect = logo.parentElement.getBoundingClientRect();
+  const texto = logo.textContent.trim();
+  if (!texto) return;
 
-        // Retrasar el movimiento del pintor ligeramente
-        setTimeout(() => {
-            if(span.textContent.trim() !== "") {
-                painter.style.left = (spanRect.left - headerRect.left) + "px";
-            }
-        }, 500); // retraso en ms, ajusta a tu gusto
+  logo.textContent = "";
+  const letters = texto.split("");
 
-        setTimeout(()=>{
-            if(span.textContent.trim() !== "") {
-                span.style.transition = "opacity 0.3s, transform 0.1s";
-                span.style.opacity = 1;
-                span.style.transform = "translateY(0)";
-            }
-            i++;
-            pintarLetra();
-        }, 400);
+  letters.forEach(letter => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    span.style.display = "inline-block";
+    span.style.opacity = 0;
+    span.style.transform = "translateY(0)";
+    span.style.lineHeight = "1";
+    logo.appendChild(span);
+  });
+
+  const spans = logo.querySelectorAll("span");
+  let i = 0;
+  painter.style.opacity = 1;
+  painter.style.transition = "left 0.3s ease";
+
+  function pintarLetra() {
+    if (i >= spans.length) {
+      painter.style.transition = "opacity 0.5s";
+      painter.style.opacity = 0;
+      return;
     }
 
-        // Pequeño delay para que painter tenga posición correcta
-        setTimeout(pintarLetra, 100);
+    const span = spans[i];
+    const spanRect = span.getBoundingClientRect();
+    const headerRect = logo.parentElement.getBoundingClientRect();
+
+    // 🌟 Primer letra: mover pintor antes de mostrarla
+    if (i === 0) {
+      painter.style.left = (spanRect.left - headerRect.left) + "px";
     }
 
-    /* ==========================
-    5️⃣ Función para cambiar idioma
-    ========================== */
-    // ==========================
-    // 3️⃣ Función para cambiar idioma (cierra menú hamburguesa en móvil)
-    // ==========================
-    function cambiarIdioma(idioma) {
-        // Cambiar todos los textos
-        for (let id in textos[idioma]) {
-            const elemento = document.getElementById(id);
-            if (!elemento) continue;
+    // 🌟 Aparecer letra
+    span.style.opacity = 1;
 
-            if (id === "logo-text") {
-                elemento.textContent = textos[idioma][id];
-                animarLogo();
-            } else {
-                elemento.textContent = textos[idioma][id];
-            }
-        }
+    // 🌟 Mover pintor ligeramente después (para efecto de pintar)
+    setTimeout(() => {
+      if (i !== 0) {
+        painter.style.left = (spanRect.left - headerRect.left) + "px";
+      }
+      i++;
+      pintarLetra();
+    }, 300); // retraso ajustable para sincronización
+  }
 
-        // Guardar idioma
-        localStorage.setItem("idioma", idioma);
+  setTimeout(pintarLetra, 100);
+}
 
-        // Cerrar menú hamburguesa si está activo
-        const menuToggle = document.querySelector(".menu-toggle");
-        const nav = document.querySelector(".header-nav");
-        if (menuToggle.classList.contains("active")) {
-            menuToggle.classList.remove("active");
-            nav.classList.remove("active");
-        }
-    }
-
-    /* ==========================
-    6️⃣ Inicializar idioma al cargar la página
-    ========================== */
-    document.addEventListener("DOMContentLoaded", () => {
-        const idiomaGuardado = localStorage.getItem("idioma") || "es";
-        setTimeout(()=>cambiarIdioma(idiomaGuardado), 50);
-    });
-
-    // ==========================
-    // 5️⃣ Cerrar menú hamburguesa al seleccionar idioma
-    // ==========================
-    document.querySelectorAll(".dropdown-content a").forEach(link => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const idioma = link.getAttribute("onclick").match(/'(.*?)'/)[1]; // extrae 'es','en','cat'
-            cambiarIdioma(idioma);
-
-            // Cerrar hamburguesa y menú
-            document.querySelector(".menu-toggle").classList.remove("active");
-            document.querySelector(".header-nav").classList.remove("active");
-
-            // Cerrar dropdown
-            document.querySelector(".dropdown-content").classList.remove("show");
-        });
-    });
-
-    // También hacemos que el botón desplegable funcione en móvil
-    const dropBtn = document.querySelector(".dropbtn");
-    const dropdownContent = document.querySelector(".dropdown-content");
-
-    dropBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        dropdownContent.classList.toggle("show");
-    });
-
-    document.querySelectorAll(".dropdown-content a").forEach(link => {
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const idioma = link.getAttribute("onclick").match(/'(.*?)'/)[1]; // extrae 'es','en','cat'
-            cambiarIdioma(idioma);
-
-            // Cerrar hamburguesa y menú
-            document.querySelector(".menu-toggle").classList.remove("active");
-            document.querySelector(".header-nav").classList.remove("active");
-            dropdownContent.classList.remove("show");
-
-            // Resaltar idioma seleccionado
-            document.querySelectorAll(".dropdown-content a").forEach(a => a.classList.remove("active-language"));
-            link.classList.add("active-language");
-        });
-    });
-    // Función para resaltar el idioma activo
-    function resaltarIdioma(idioma) {
-        document.querySelectorAll(".dropdown-content a").forEach(a => {
-            a.classList.remove("active-language");
-            const linkIdioma = a.getAttribute("onclick").match(/'(.*?)'/)[1];
-            if(linkIdioma === idioma) {
-                a.classList.add("active-language");
-            }
-        });
-    }
-
-    // Modificamos cambiarIdioma para que también resalte
-    function cambiarIdioma(idioma){
-        for (let id in textos[idioma]) {
-            const elemento = document.getElementById(id);
-            if(!elemento) continue;
-
-            if(id === "logo-text"){
-                elemento.textContent = textos[idioma][id];
-                animarLogo();
-            } else {
-                elemento.textContent = textos[idioma][id];
-            }
-        }
-        localStorage.setItem("idioma", idioma);
-
-        // Resaltar el idioma seleccionado
-        resaltarIdioma(idioma);
-
-        // Cerrar menú hamburguesa
-        document.querySelector(".menu-toggle").classList.remove("active");
-        document.querySelector(".header-nav").classList.remove("active");
-        const dropdownContent = document.querySelector(".dropdown-content");
-        if(dropdownContent) dropdownContent.classList.remove("show");
-    }
-
-    // Al cargar la página
-    document.addEventListener("DOMContentLoaded", () => {
-        const idiomaGuardado = localStorage.getItem("idioma") || "es";
-        setTimeout(() => {
-            cambiarIdioma(idiomaGuardado); // esto ahora también resalta el idioma correcto
-        }, 50);
-    });
-    </script>
+</script>
 
 </body>
 </html>

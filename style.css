@@ -149,6 +149,8 @@ header .iconos:hover {
   background: #f39c12;
   color: white;
   transform: translateY(-2px);
+  border: #d35400 2px solid;
+  border-radius: 10px;
 }
 
 
@@ -724,3 +726,6 @@ footer {
         text-align: center; /* opcional, para que el texto se vea mejor centrado */
     }
 }
+
+
+
