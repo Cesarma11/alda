@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Albañilería en Cerdanyola del Vallès | Alda</title>
+  <link rel="icon" type="image/png" href="img/iconoAlbañil.png">
+  <meta name="description" content="Empresa de albañilería en Cerdanyola del Vallès. Reformas, obras y trabajos profesionales. Presupuesto sin compromiso.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <section>
+        <h2 id="por-que-titulo"></h2>
+        <p><strong id="parrafoNegrita"></strong><br><br></p>
+        <p style="text-align: justify;" id="parrafo" ></p>
+        <img  width="40%;" src="img/locales/local0.png" alt="" >
+    </section>
+    <section>
+        <h2 id="por-que-titulo2"></h2>
+        <p style="text-align: justify;" id="parrafo2"></p>
+
+        <div class="imagenes-cocina">
+            <img src="img/locales/local1.jpg" alt="">
+            <img src="img/locales/local2.jpg" alt="">
+        </div>
+        <div class="imagenes-cocina">
+            <img src="img/locales/local3.jpg" alt="">
+            <img src="img/locales/local4.jpg" alt="">
+        </div>
+        <div class="imagenes-cocina">
+            <img src="img/locales/local5.jpg" alt="">
+            <img src="img/locales/local6.jpg" alt="">
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2 id="contacto-titulo">Contacto</h2>
+        <p id="telefono-text"><strong>Teléfono:</strong> 622 62 98 80</p>
+        <p id="zona-text"><strong>Zona de trabajo:</strong> Cerdanyola del Vallès y alrededores</p>
+        <a href="tel:622 62 98 80" class="btn" id="solicitar-btn">📞 Solicitar presupuesto</a>
+    </section>
+
+    <footer>
+    <p id="footer-text">© 2026 Alda · Albañilería en Cerdanyola del Vallès</p>
+    </footer>
+
+ <!-- ========================= JAVASCRIPT ========================= -->
+
+<script>
+fetch("header.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("header").innerHTML = html;
+    inicializarHeader();
+  });
+
+function inicializarHeader() {
+
+  /* ===== MENU HAMBURGUESA ===== */
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+
+if (menuToggle && nav) {
+  menuToggle.addEventListener("click", e => {
+    e.stopPropagation();
+    menuToggle.classList.toggle("active");
+    nav.classList.toggle("active");
+  });
+
+  nav.addEventListener("click", e => e.stopPropagation()); // evita que clics dentro del nav cierren el menú
+  document.addEventListener("click", () => {
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+  });
+  
+  const dropdown = document.querySelector(".dropdown");
+  if (dropdown) {
+    dropdown.addEventListener("click", e => e.stopPropagation()); // evita que clic en idiomas cierre el menú
+  }
+}
+
+
+  /* ===== EVENTOS IDIOMAS ===== */
+  document.querySelectorAll(".dropdown-content a[data-lang]").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      cambiarIdioma(link.dataset.lang);
+      animarLogo(); // ✅ si quieres que se repita al cambiar idioma
+    });
+  });
+
+  /* ===== IDIOMA INICIAL ===== */
+  const idiomaGuardado = localStorage.getItem("idioma") || "es";
+  cambiarIdioma(idiomaGuardado);
+  resaltarIdioma(idiomaGuardado);
+
+  /* ===== ANIMACIÓN LOGO ===== */
+  animarLogo();
+}
+
+    /* ==========================
+    3️⃣ TEXTOS POR IDIOMA
+    ========================== */
+    const textos = {
+        es: {
+            "logo-text":"Construc,alda", 
+            "llamar-btn":"📞 Llamar ahora 622 62 98 80",
+            "whatsapp-text":"Envíanos un WhatsApp",
+            "nav-inicio":"Inicio",
+            "nav-quienes":"Quiénes somos",
+            "nav-servicios":"Qué hacemos ▼",
+            "nav-proyectos":"Proyectos",
+            "nav-contacto":"Contacto",
+            "nav-idioma":"Idioma ▼",
+            "servicios-titulo":"Nuestros Servicios",
+            "idiomaEspanol":"Español",
+            "idiomaCatalan":"Catalán",
+            "idiomaIngles":"Inglés",
+            "servicio-cocinas":"Cocinas",
+            "servicio-cocinas2":"Cocinas",
+            "servicio-banos":"Baños",
+            "servicio-banos2":"Baños",
+            "servicio-reformas":"Reformas Generales",
+            "servicio-reformas2":"Reformas Generales",
+            "servicio-fachadas":"Fachadas",
+            "servicio-fachadas2":"Fachadas",
+            "servicio-comunidades":"Comunidades",
+            "servicio-comunidades2":"Comunidades",
+            "servicio-locales":"Locales",
+            "servicio-locales2":"Locales",
+            "servicio-oficinas":"Oficinas",
+            "servicio-oficinas2":"Oficinas",
+            "servicio-alquilar":"Reformas para alquilar",
+            "servicio-alquilar2":"Reformas para alquilar",
+
+            "por-que-titulo":"LOCALES COMERCIALES",
+            "por-que-titulo2":`Descubre algunos de nuestros proyectos de reforma más representativos.`,
+            "parrafoNegrita":"Un espacio comercial con un diseño cuidado puede ser clave para impulsar el éxito de tu empresa.",
+            "parrafo":`En Construc,ALDA somos expertos en la renovación de locales comerciales, diseñando espacios pensados para
+                captar clientes y mejorar el rendimiento del negocio. Ya sea una tienda o una oficina, convertimos tu establecimiento en 
+                un entorno funcional y atractivo, combinando creatividad y experiencia. Ofrecemos un servicio completo que abarca desde 
+                el diseño y la planificación hasta la ejecución minuciosa de cada fase del proyecto.`,
+            "parrafo2":`Explora nuestra selección de proyectos de reformas integrales en locales comerciales, donde diseño, funcionalidad 
+                y calidad se combinan para convertir cada espacio en un negocio con personalidad y proyección. En Construc,ALDA somos 
+                especialistas en la renovación de espacios comerciales, adaptándonos a las necesidades específicas de cada cliente y 
+                ofreciendo soluciones innovadoras que refuerzan la identidad de cada marca. Nuestra galería de proyectos demuestra el 
+                compromiso y la excelencia que aplicamos en cada trabajo realizado.`,
+            "razon1":"✔ Empresa local en Sardañola del Vallés",
+            "razon2":"✔ Presupuesto sin compromiso",
+            "razon3":"✔ Seriedad y acabados de calidad",
+            "razon4":"✔ Atención personalizada",
+            "trabajos-titulo":"Trabajos realizados",
+            "contacto-titulo":"Contacto",
+            "telefono-text":"Teléfono: 622 62 98 80",
+            "zona-text":"Zona de trabajo: Barcelona, Vallés Oriental y Vallés Occidental",
+            "solicitar-btn":"📞 Solicitar presupuesto",
+            "footer-text":"© 2026 Alda · Albañilería en Sardañola del Vallés"
+        },
+        en: {
+            "logo-text":"Construc,ALDA",
+            "llamar-btn":"📞 Call now 622 62 98 80",
+            "whatsapp-text":"Send us a WhatsApp",
+            "nav-inicio":"Star",
+            "nav-quienes":"About us",
+            "nav-servicios":"Services",
+            "nav-proyectos":"Projects",
+            "nav-contacto":"Contact",
+            "servicios-titulo":"Our Services",
+            "idiomaEspanol":"Spanish",
+            "idiomaCatalan":"Catalan",
+            "idiomaIngles":"English",
+             "servicio-cocinas":"Kitchens",
+            "servicio-cocinas2":"Kitchens",
+            "servicio-banos":"Bathrooms",
+            "servicio-banos2":"Bathrooms",
+            "servicio-reformas":"Renovations",
+            "servicio-reformas2":"Renovations",
+            "servicio-fachadas":"Facades",
+            "servicio-fachadas2":"Facades",
+            "servicio-comunidades":"Communities",
+            "servicio-comunidades2":"Communities",
+            "servicio-locales":"Premises",
+            "servicio-locales2":"Premises",
+            "servicio-oficinas":"Office",
+            "servicio-oficinas2":"Office",
+            "servicio-alquilar":"Rental reform",
+            "servicio-alquilar2":"Rental reform",
+            "por-que-titulo":"COMMERCIAL PREMISES",
+            "por-que-titulo2":`Explore some of our most outstanding renovation projects.`,            
+            "parrafoNegrita":`A well-designed commercial space can play a crucial role in driving your business success.`,
+            "parrafo":`At Construc,ALDA, we specialize in commercial renovations, creating spaces designed to attract customers
+                and enhance business performance. Whether it’s a retail store or an office, we transform your commercial space into a 
+                functional and appealing environment, combining creativity and expertise. Our comprehensive approach covers everything 
+                from design and planning to the precise execution of every stage of the project.`,
+            "parrafo2":`Discover our selection of full commercial renovation projects, where design, functionality, and quality come 
+                together to transform spaces into successful businesses. At Construc,ALDA, we specialize in commercial space renovations, 
+                tailoring each project to our clients’ specific needs and delivering innovative solutions that enhance every brand’s identity. 
+                Our project gallery reflects our commitment to excellence in every renovation we complete.`,
+            "razon1":"✔ Local company in Cerdanyola del Vallès",
+            "razon2":"✔ Free quote",
+            "razon3":"✔ Reliability and quality finishes",
+            "razon4":"✔ Personalized attention",
+            "trabajos-titulo":"Completed projects",
+            "contacto-titulo":"Contact",
+            "telefono-text":"Phone: 622 62 98 80",
+            "zona-text":"Working area: Barcelona, Vallés Oriental and Vallés Occidental",
+            "solicitar-btn":"📞 Request a quote",
+            "footer-text":"© 2026 Alda · Construction in Cerdanyola del Vallès"
+        },
+        cat: {
+            "logo-text":"Construc,ALDA",
+            "llamar-btn":"📞 Truca ara 622 62 98 80",
+            "whatsapp-text":"Envia’ns un WhatsApp",
+            "nav-inicio":"Inici",
+            "nav-quienes":"Qui som",
+            "nav-servicios":"Què fem",
+            "nav-proyectos":"Projectes",
+            "nav-contacto":"Contacte",
+            "servicios-titulo":"Els nostres serveis",
+            "idiomaEspanol":"Espanyol",
+            "idiomaCatalan":"Català",
+            "idiomaIngles":"Anglès",
+             "servicio-cocinas":"Cuines",
+            "servicio-cocinas2":"Cuines",
+            "servicio-banos":"Banys",
+            "servicio-banos2":"Banys",
+            "servicio-reformas":"Reformes",
+            "servicio-reformas2":"Reformes",
+            "servicio-fachadas":"Façanes",
+            "servicio-fachadas2":"Façanes",
+            "servicio-locales":"Locals",
+            "servicio-locales2":"Locals",
+            "servicio-comunidades":"Comunitats",
+            "servicio-comunidades2":"Comunitats",
+            "servicio-oficinas":"Oficines",
+            "servicio-oficinas2":"Oficines",
+            "servicio-alquilar":"Reforma lloguer",
+            "servicio-alquilar2":"Reforma lloguer",
+            "por-que-titulo":"LOCALS COMERCIALS",
+            "por-que-titulo2":`Descobreix alguns dels nostres projectes de reforma més destacats.`,
+            "parrafoNegrita":"Un espai comercial amb un disseny acurat pot ser clau per impulsar l’èxit del teu negoci.",
+            "parrafo":`A Construc,ALDA som especialistes en reformes de locals comercials, creant espais pensats 
+                per atraure clients i millorar el rendiment del negoci. Ja sigui una botiga o una oficina, transformem el teu 
+                espai comercial en un entorn funcional i atractiu, combinant creativitat i experiència. El nostre enfocament integral
+                inclou el disseny, la planificació i l’execució acurada de cada fase del projecte.`,
+            "parrafo2":`Explora la nostra selecció de projectes de reformes integrals en locals comercials, on el disseny, la 
+                funcionalitat i la qualitat s’uneixen per transformar espais en negocis amb identitat i projecció. A Construc,ALDA som 
+                especialistes en la renovació d’espais comercials, adaptant-nos a les necessitats específiques de cada client i oferint 
+                solucions innovadores que reforcen la identitat de cada marca. La nostra galeria de projectes reflecteix el nostre compromís 
+                amb l’excel·lència en cada reforma realitzada.`,
+            "razon1":"✔ Empresa local a Cerdanyola del Vallès",
+            "razon2":"✔ Pressupost sense compromís",
+            "razon3":"✔ Serietat i acabats de qualitat",
+            "razon4":"✔ Atenció personalitzada",
+            "trabajos-titulo":"Treballs realitzats",
+            "contacto-titulo":"Contacte",
+            "telefono-text":"Telèfon: 622 62 98 80",
+            "zona-text":"Zona de treball: Barcelona, Vallès Oriental, Vallès Occidental",
+            "solicitar-btn":"📞 Sol·licitar pressupost",
+            "footer-text":"© 2026 Alda · Albañileria a Cerdanyola del Vallès"
+        }
+    };
+
+/* ===== FUNCIONES IDIOMA ===== */
+
+function resaltarIdioma(idioma) {
+  const enlaces = document.querySelectorAll(".dropdown-content a[data-lang]");
+  enlaces.forEach(a => a.classList.remove("active-language"));
+  const activo = document.querySelector(`.dropdown-content a[data-lang="${idioma}"]`);
+  if (activo) activo.classList.add("active-language");
+}
+
+function cambiarIdioma(idioma){
+  for (let id in textos[idioma]) {
+    const elemento = document.getElementById(id);
+    if (!elemento) continue;
+
+    elemento.textContent = textos[idioma][id];
+  }
+
+  localStorage.setItem("idioma", idioma);
+  resaltarIdioma(idioma);
+
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+  if(menuToggle && nav){
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+  }
+}
+/* animar Logo*/
+function animarLogo() {
+  const logo = document.getElementById("logo-text");
+  const painter = document.getElementById("painter");
+  if (!logo || !painter) return;
+
+  const texto = logo.textContent.trim();
+  if (!texto) return;
+
+  logo.textContent = "";
+  const letters = texto.split("");
+
+  letters.forEach(letter => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    span.style.display = "inline-block";
+    span.style.opacity = 0;
+    span.style.transform = "translateY(0)";
+    span.style.lineHeight = "1";
+    logo.appendChild(span);
+  });
+
+  const spans = logo.querySelectorAll("span");
+  let i = 0;
+  painter.style.opacity = 1;
+  painter.style.transition = "left 0.3s ease";
+
+  function pintarLetra() {
+    if (i >= spans.length) {
+      painter.style.transition = "opacity 0.5s";
+      painter.style.opacity = 0;
+      return;
+    }
+
+    const span = spans[i];
+    const spanRect = span.getBoundingClientRect();
+    const headerRect = logo.parentElement.getBoundingClientRect();
+
+    // 🌟 Primer letra: mover pintor antes de mostrarla
+    if (i === 0) {
+      painter.style.left = (spanRect.left - headerRect.left) + "px";
+    }
+
+    // 🌟 Aparecer letra
+    span.style.opacity = 1;
+
+    // 🌟 Mover pintor ligeramente después (para efecto de pintar)
+    setTimeout(() => {
+      if (i !== 0) {
+        painter.style.left = (spanRect.left - headerRect.left) + "px";
+      }
+      i++;
+      pintarLetra();
+    }, 300); // retraso ajustable para sincronización
+  }
+
+  setTimeout(pintarLetra, 100);
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Albañilería en Cerdanyola del Vallès | Alda</title>
+  <link rel="icon" type="image/png" href="img/iconoAlbañil.png">
+  <meta name="description" content="Empresa de albañilería en Cerdanyola del Vallès. Reformas, obras y trabajos profesionales. Presupuesto sin compromiso.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <section>
+        <h2 id="por-que-titulo"></h2>
+        <p><strong id="parrafoNegrita"></strong><br><br></p>
+        <p style="text-align: justify;" id="parrafo" ></p>
+        <img  width="40%;" src="img/fachadas/fachada0.png" alt="" >
+    </section>
+    <section>
+        <h2 id="por-que-titulo2"></h2>
+        <p style="text-align: justify;" id="parrafo2"></p>
+
+        <div class="imagenes-cocina">
+            <img src="img/fachadas/fachada1.jpg" alt="">
+            <img src="img/fachadas/fachada2.jpg" alt="">
+        </div>
+        <div class="imagenes-cocina">
+            <img src="img/fachadas/fachada3.jpg" alt="">
+            <img src="img/fachadas/fachada4.jpg" alt="">
+        </div>
+        <div class="imagenes-cocina">
+            <img src="img/fachadas/fachada5.jpg" alt="">
+            <img src="img/fachadas/fachada6.jpg" alt="">
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2 id="contacto-titulo">Contacto</h2>
+        <p id="telefono-text"><strong>Teléfono:</strong> 622 62 98 80</p>
+        <p id="zona-text"><strong>Zona de trabajo:</strong> Cerdanyola del Vallès y alrededores</p>
+        <a href="tel:622 62 98 80" class="btn" id="solicitar-btn">📞 Solicitar presupuesto</a>
+    </section>
+
+    <footer>
+    <p id="footer-text">© 2026 Alda · Albañilería en Cerdanyola del Vallès</p>
+    </footer>
+
+ <!-- ========================= JAVASCRIPT ========================= -->
+
+<script>
+fetch("header.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("header").innerHTML = html;
+    inicializarHeader();
+  });
+
+function inicializarHeader() {
+
+  /* ===== MENU HAMBURGUESA ===== */
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+
+if (menuToggle && nav) {
+  menuToggle.addEventListener("click", e => {
+    e.stopPropagation();
+    menuToggle.classList.toggle("active");
+    nav.classList.toggle("active");
+  });
+
+  nav.addEventListener("click", e => e.stopPropagation()); // evita que clics dentro del nav cierren el menú
+  document.addEventListener("click", () => {
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+  });
+  
+  const dropdown = document.querySelector(".dropdown");
+  if (dropdown) {
+    dropdown.addEventListener("click", e => e.stopPropagation()); // evita que clic en idiomas cierre el menú
+  }
+}
+
+
+  /* ===== EVENTOS IDIOMAS ===== */
+  document.querySelectorAll(".dropdown-content a[data-lang]").forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      cambiarIdioma(link.dataset.lang);
+      animarLogo(); // ✅ si quieres que se repita al cambiar idioma
+    });
+  });
+
+  /* ===== IDIOMA INICIAL ===== */
+  const idiomaGuardado = localStorage.getItem("idioma") || "es";
+  cambiarIdioma(idiomaGuardado);
+  resaltarIdioma(idiomaGuardado);
+
+  /* ===== ANIMACIÓN LOGO ===== */
+  animarLogo();
+}
+
+    /* ==========================
+    3️⃣ TEXTOS POR IDIOMA
+    ========================== */
+    const textos = {
+        es: {
+            "logo-text":"Construc,alda", 
+            "llamar-btn":"📞 Llamar ahora 622 62 98 80",
+            "whatsapp-text":"Envíanos un WhatsApp",
+            "nav-inicio":"Inicio",
+            "nav-quienes":"Quiénes somos",
+            "nav-servicios":"Qué hacemos ▼",
+            "nav-proyectos":"Proyectos",
+            "nav-contacto":"Contacto",
+            "nav-idioma":"Idioma ▼",
+            "servicios-titulo":"Nuestros Servicios",
+            "idiomaEspanol":"Español",
+            "idiomaCatalan":"Catalán",
+            "idiomaIngles":"Inglés",
+            "servicio-cocinas":"Cocinas",
+            "servicio-cocinas2":"Cocinas",
+            "servicio-banos":"Baños",
+            "servicio-banos2":"Baños",
+            "servicio-reformas":"Reformas Generales",
+            "servicio-reformas2":"Reformas Generales",
+            "servicio-fachadas":"Fachadas",
+            "servicio-fachadas2":"Fachadas",
+            "servicio-comunidades":"Comunidades",
+            "servicio-comunidades2":"Comunidades",
+            "servicio-locales":"Locales",
+            "servicio-locales2":"Locales",
+            "servicio-oficinas":"Oficinas",
+            "servicio-oficinas2":"Oficinas",
+            "servicio-alquilar":"Reformas para alquilar",
+            "servicio-alquilar2":"Reformas para alquilar",
+
+            "por-que-titulo":"FACHADAS",
+            "por-que-titulo2":`¿Por qué contratar nuestra empresa rehabilitación de fachadas en Barcelona?`,
+            "parrafoNegrita":"¿Necesitas rehabilitar tu fachada en Barcelona?",
+            "parrafo":`Las fachadas son un componente esencial de cualquier edificio, y con el paso del tiempo, 
+                el uso diario y las condiciones climáticas, es normal que comiencen a presentar desgaste. 
+                Esto puede traducirse en pérdida de color y brillo, debilitamiento de la estructura, fisuras, roturas, 
+                filtraciones o desprendimientos. Estos problemas no solo afectan la apariencia, sino también la seguridad y 
+                funcionalidad del edificio. Para evitar mayores daños, lo ideal es contar con profesionales con experiencia, 
+                como el equipo de Construc,ALDA. Estamos especializados en la rehabilitación de fachadas y 
+                contamos con años de trayectoria en reformas y restauraciones de viviendas. Ofrecemos una amplia gama de servicios, 
+                que incluyen rehabilitación, revestimiento, aislamiento y derribo de fachadas, siempre adaptándonos a tus necesidades. 
+                Además, elaboramos presupuestos económicos y personalizados, asegurando que cada proyecto, ya seas particular o empresa, 
+                reciba la atención completa que requiere.`,
+            "parrafo2":`Transforma tu edificio con los mejores especialistas en rehabilitación, fachadas y reformas integrales en Barcelona. 
+                Si buscas darle una nueva vida a una fachada desgastada o renovar un edificio deteriorado, 
+                nuestro equipo profesional está listo para hacerlo realidad. No importa si se trata de pequeños arreglos o de remodelaciones 
+                completas: nos ocupamos de cada detalle. Además, ofrecemos presupuestos personalizados, adaptados a tus necesidades y 
+                a tu presupuesto. No dejes pasar la oportunidad de mejorar tu edificio y aportar un nuevo aire al entorno urbano de Barcelona. 
+                ¡Contáctanos hoy mismo y comienza la renovación que tu edificio merece!`,
+            "razon1":"✔ Empresa local en Sardañola del Vallés",
+            "razon2":"✔ Presupuesto sin compromiso",
+            "razon3":"✔ Seriedad y acabados de calidad",
+            "razon4":"✔ Atención personalizada",
+            "trabajos-titulo":"Trabajos realizados",
+            "contacto-titulo":"Contacto",
+            "telefono-text":"Teléfono: 622 62 98 80",
+            "zona-text":"Zona de trabajo: Barcelona, Vallés Oriental y Vallés Occidental",
+            "solicitar-btn":"📞 Solicitar presupuesto",
+            "footer-text":"© 2026 Alda · Albañilería en Sardañola del Vallés"
+        },
+        en: {
+            "logo-text":"Construc,ALDA",
+            "llamar-btn":"📞 Call now 622 62 98 80",
+            "whatsapp-text":"Send us a WhatsApp",
+            "nav-inicio":"Star",
+            "nav-quienes":"About us",
+            "nav-servicios":"Services",
+            "nav-proyectos":"Projects",
+            "nav-contacto":"Contact",
+            "servicios-titulo":"Our Services",
+            "idiomaEspanol":"Spanish",
+            "idiomaCatalan":"Catalan",
+            "idiomaIngles":"English",
+             "servicio-cocinas":"Kitchens",
+            "servicio-cocinas2":"Kitchens",
+            "servicio-banos":"Bathrooms",
+            "servicio-banos2":"Bathrooms",
+            "servicio-reformas":"Renovations",
+            "servicio-reformas2":"Renovations",
+            "servicio-fachadas":"Facades",
+            "servicio-fachadas2":"Facades",
+            "servicio-comunidades":"Communities",
+            "servicio-comunidades2":"Communities",
+            "servicio-locales":"Premises",
+            "servicio-locales2":"Premises",
+            "servicio-oficinas":"Office",
+            "servicio-oficinas2":"Office",
+            "servicio-alquilar":"Rental reform",
+            "servicio-alquilar2":"Rental reform",
+            "por-que-titulo":"FACADES",
+            "por-que-titulo2":`Why hire our facade renovation company in Barcelona?`,            
+            "parrafoNegrita":`Do you need to renovate your facade in Barcelona?`,
+            "parrafo":`Facades are a crucial part of any building, and over time, daily use and weather conditions can naturally cause 
+                wear and tear. This may result in fading, loss of shine, structural weakening, cracks, breaks, leaks, or detachment. 
+                These issues not only affect the building’s appearance but also its safety and functionality. To prevent further damage, 
+                it is best to rely on experienced professionals like the team at Construc,ALDA. We specialize in facade 
+                rehabilitation and have years of experience in home renovation and restoration. We offer a wide range of services, 
+                including rehabilitation, cladding, insulation, and facade demolition, always tailored to your needs. 
+                We also provide affordable, customized quotes to ensure every project—whether for individuals or businesses—receives 
+                the full attention it deserves.`,
+            "parrafo2":`Give your building a fresh new look with top experts in building rehabilitation, facades, and full renovations 
+                in Barcelona. Whether you want to restore a worn-out facade or revitalize a deteriorating building, our professional 
+                team is ready to bring your vision to life. No project is too big or small: from minor repairs to complete renovations, 
+                we handle every detail. We also provide customized quotes tailored to your needs and budget. Take this opportunity to 
+                enhance your building and make a noticeable impact on Barcelona’s urban landscape. Contact us today and start the 
+                renovation your building deserves!`,
+            "razon1":"✔ Local company in Cerdanyola del Vallès",
+            "razon2":"✔ Free quote",
+            "razon3":"✔ Reliability and quality finishes",
+            "razon4":"✔ Personalized attention",
+            "trabajos-titulo":"Completed projects",
+            "contacto-titulo":"Contact",
+            "telefono-text":"Phone: 622 62 98 80",
+            "zona-text":"Working area: Barcelona, Vallés Oriental and Vallés Occidental",
+            "solicitar-btn":"📞 Request a quote",
+            "footer-text":"© 2026 Alda · Construction in Cerdanyola del Vallès"
+        },
+        cat: {
+            "logo-text":"Construc,ALDA",
+            "llamar-btn":"📞 Truca ara 622 62 98 80",
+            "whatsapp-text":"Envia’ns un WhatsApp",
+            "nav-inicio":"Inici",
+            "nav-quienes":"Qui som",
+            "nav-servicios":"Què fem",
+            "nav-proyectos":"Projectes",
+            "nav-contacto":"Contacte",
+            "servicios-titulo":"Els nostres serveis",
+            "idiomaEspanol":"Espanyol",
+            "idiomaCatalan":"Català",
+            "idiomaIngles":"Anglès",
+             "servicio-cocinas":"Cuines",
+            "servicio-cocinas2":"Cuines",
+            "servicio-banos":"Banys",
+            "servicio-banos2":"Banys",
+            "servicio-reformas":"Reformes",
+            "servicio-reformas2":"Reformes",
+            "servicio-fachadas":"Façanes",
+            "servicio-fachadas2":"Façanes",
+            "servicio-locales":"Locals",
+            "servicio-locales2":"Locals",
+            "servicio-comunidades":"Comunitats",
+            "servicio-comunidades2":"Comunitats",
+            "servicio-oficinas":"Oficines",
+            "servicio-oficinas2":"Oficines",
+            "servicio-alquilar":"Reforma lloguer",
+            "servicio-alquilar2":"Reforma lloguer",
+            "por-que-titulo":"FAÇANES",
+            "por-que-titulo2":`Per què contractar la nostra empresa rehabilitació de façanes a Barcelona?`,
+            "parrafoNegrita":'Necessites rehabilitar la façana a Barcelona?',
+            "parrafo":`Les façanes són un element essencial de qualsevol edifici, i amb el temps, l’ús diari i les condicions climàtiques, 
+                és normal que comencin a mostrar desgast. Això pot provocar pèrdua de color i brillantor, debilitament de l’estructura, 
+                esquerdes, trencaments, filtracions o despreniments. Aquests problemes afecten no només l’aspecte, sinó també la 
+                seguretat i funcionalitat de l’edifici. Per evitar danys majors, el millor és comptar amb professionals amb experiència, 
+                com l’equip de Construc,ALDA. Estem especialitzats en la rehabilitació de façanes  i 
+                tenim anys d’experiència en reformes i restauracions de vivendes. Oferim una àmplia gamma de serveis, que inclou 
+                rehabilitació, revestiment, aïllament i enderroc de façanes, sempre adaptant-nos a les teves necessitats. 
+                També oferim pressupostos econòmics i personalitzats, assegurant que cada projecte, tant si ets particular com empresa, 
+                rebi tota l’atenció que necessita.`,
+            "parrafo2":`Transforma el teu edifici amb els millors especialistes en rehabilitació, façanes i reformes integrals a Barcelona. 
+                Si vols donar nova vida a una façana desgastada o renovar un edifici en mal estat, el nostre equip professional està 
+                preparat per fer realitat la teva idea. No importa si es tracta de petites reparacions o de remodelacions completes: 
+                ens encarreguem de tots els detalls. També oferim pressupostos personalitzats, adaptats a les teves necessitats i al 
+                teu pressupost. Aprofita l’oportunitat de millorar el teu edifici i aportar un nou aire a l’entorn urbà de Barcelona. 
+                Contacta’ns avui mateix i inicia la renovació que el teu edifici es mereix!`,
+            "razon1":"✔ Empresa local a Cerdanyola del Vallès",
+            "razon2":"✔ Pressupost sense compromís",
+            "razon3":"✔ Serietat i acabats de qualitat",
+            "razon4":"✔ Atenció personalitzada",
+            "trabajos-titulo":"Treballs realitzats",
+            "contacto-titulo":"Contacte",
+            "telefono-text":"Telèfon: 622 62 98 80",
+            "zona-text":"Zona de treball: Barcelona, Vallès Oriental, Vallès Occidental",
+            "solicitar-btn":"📞 Sol·licitar pressupost",
+            "footer-text":"© 2026 Alda · Albañileria a Cerdanyola del Vallès"
+        }
+    };
+
+/* ===== FUNCIONES IDIOMA ===== */
+
+function resaltarIdioma(idioma) {
+  const enlaces = document.querySelectorAll(".dropdown-content a[data-lang]");
+  enlaces.forEach(a => a.classList.remove("active-language"));
+  const activo = document.querySelector(`.dropdown-content a[data-lang="${idioma}"]`);
+  if (activo) activo.classList.add("active-language");
+}
+
+function cambiarIdioma(idioma){
+  for (let id in textos[idioma]) {
+    const elemento = document.getElementById(id);
+    if (!elemento) continue;
+
+    elemento.textContent = textos[idioma][id];
+  }
+
+  localStorage.setItem("idioma", idioma);
+  resaltarIdioma(idioma);
+
+  const menuToggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".header-nav");
+  if(menuToggle && nav){
+    menuToggle.classList.remove("active");
+    nav.classList.remove("active");
+  }
+}
+/* animar Logo*/
+function animarLogo() {
+  const logo = document.getElementById("logo-text");
+  const painter = document.getElementById("painter");
+  if (!logo || !painter) return;
+
+  const texto = logo.textContent.trim();
+  if (!texto) return;
+
+  logo.textContent = "";
+  const letters = texto.split("");
+
+  letters.forEach(letter => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    span.style.display = "inline-block";
+    span.style.opacity = 0;
+    span.style.transform = "translateY(0)";
+    span.style.lineHeight = "1";
+    logo.appendChild(span);
+  });
+
+  const spans = logo.querySelectorAll("span");
+  let i = 0;
+  painter.style.opacity = 1;
+  painter.style.transition = "left 0.3s ease";
+
+  function pintarLetra() {
+    if (i >= spans.length) {
+      painter.style.transition = "opacity 0.5s";
+      painter.style.opacity = 0;
+      return;
+    }
+
+    const span = spans[i];
+    const spanRect = span.getBoundingClientRect();
+    const headerRect = logo.parentElement.getBoundingClientRect();
+
+    // 🌟 Primer letra: mover pintor antes de mostrarla
+    if (i === 0) {
+      painter.style.left = (spanRect.left - headerRect.left) + "px";
+    }
+
+    // 🌟 Aparecer letra
+    span.style.opacity = 1;
+
+    // 🌟 Mover pintor ligeramente después (para efecto de pintar)
+    setTimeout(() => {
+      if (i !== 0) {
+        painter.style.left = (spanRect.left - headerRect.left) + "px";
+      }
+      i++;
+      pintarLetra();
+    }, 300); // retraso ajustable para sincronización
+  }
+
+  setTimeout(pintarLetra, 100);
+}
+
+</script>
+
+</body>
+</html>
